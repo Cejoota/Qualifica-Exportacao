@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Marketing na Exportação Indireta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into three key areas: 1) Noções de Marketing (Basic concepts), 2) Benefícios das Estratégias (Benefits of digital strategies), and 3) Ferramentas de Apoio (Support tools). This flow guides the user from understanding the importance of marketing in indirect export to a detailed breakdown of digital strategies and available resources. Interactive elements include accordions to detail each strategy and its benefits. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Basic concepts and controllable aspects of marketing. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Benefits of various digital marketing strategies. Goal: Inform/Organize. Method: Accordions (HTML/JS) for each strategy (website, social media, marketplaces, SEO), detailing their benefits. Justification: Organizes detailed information about each strategy into a clean, easy-to-read format.
+        - Report Info: Pitfalls of the "indirect marketing" stage. Goal: Advise/Warn. Method: Text block with a clear message. Justification: Highlights a critical point about not being passive in marketing.
+        - Report Info: Support tools. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Marketing na Exportação Indireta</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Como usar o marketing para promover seus produtos, mesmo com a ajuda de intermediários.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções de Marketing</button>
+            <button data-tab="strategies" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Benefícios das Estratégias</button>
+            <button data-tab="tools" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Ferramentas de Apoio</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Básicas de Marketing para Exportação</h2>
+                    <p class="mb-4 text-stone-600">O marketing internacional é uma ferramenta competitiva para a busca de novos negócios no exterior. No contexto da exportação indireta, é crucial que a empresa invista ativamente na promoção de seus produtos, pois a responsabilidade final pelo marketing continua sendo dela, mesmo com o uso de intermediários.</p>
+                    
+                    <div class="space-y-4 text-stone-700">
+                        <h3 class="text-xl font-semibold text-blue-600">Aspectos Controláveis do Marketing:</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>**Produto:** Benefícios, marca, qualidade, etc.</li>
+                            <li>**Preço:** Custos, margem, mercado, etc.</li>
+                            <li>**Distribuição:** Canais de distribuição, logística, etc.</li>
+                            <li>**Promoção:** Público-alvo, materiais, ações, etc.</li>
+                        </ul>
+                        <h3 class="text-xl font-semibold text-blue-600 mt-4">Estratégias de Marketing aplicáveis à Exportação Indireta:</h3>
+                        <p>Para ter seus produtos conhecidos no mercado externo, a empresa deve realizar investimentos em marketing, incluindo:</p>
+                        <ol class="list-decimal list-inside space-y-2 ml-4">
+                            <li>Promoção de ações de marketing digital.</li>
+                            <li>Website em outro idioma.</li>
+                            <li>Materiais promocionais traduzidos.</li>
+                            <li>Uso de redes sociais.</li>
+                            <li>Avaliação da presença em marketplaces.</li>
+                            <li>Utilização de mecanismos de otimização de busca online (estratégias de SEO).</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="strategies" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Benefícios das Estratégias de Marketing Digital</h2>
+                    <p class="mb-4 text-stone-600">Conheça os benefícios das principais estratégias de marketing digital para promover seu produto no mercado internacional e saiba por que a postura passiva pode ser prejudicial, mesmo com a ajuda de intermediários. Clique para expandir os detalhes de cada estratégia.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Ações de Marketing Digital</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Campanhas digitais podem levar o produto a ganhar fama rapidamente, contribuindo para a exposição da marca internacionalmente. É crucial combinar marketing tradicional e digital em uma "campanha 360 graus".</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Website em outro idioma</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Permite que compradores potenciais conheçam o produto de forma fácil e rápida, abrindo portas para transações internacionais. É um canal de comunicação online 24/7 que fortalece a marca.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Materiais promocionais traduzidos</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Materiais como catálogos e folders, quando traduzidos, promovem uma comunicação personalizada, fortalecem a marca e agregam valor perante os clientes. Elementos-chave incluem fotos de qualidade, especificações e informações de contato.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Redes sociais e SEO</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Redes sociais são condutoras de comunicação com poder de viralização, gerando possibilidades de vendas internacionais. Otimização de busca online (SEO) confere maior destaque à sua empresa, o que é ideal para produtos ainda pouco conhecidos.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Marketing internacional indireto: Risco de passividade</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2 font-semibold">Alerta:</p>
+                                <p class="mb-2">Posicionar-se no estágio de "marketing internacional indireto" (sem incentivo da empresa) pode ser um risco. Espera-se que a empresa adote ações de marketing ativamente e não espere que a promoção internacional seja conduzida exclusivamente pelo intermediário.</p>
+                                <p class="mb-2">A responsabilidade final pela promoção dos produtos, inclusive internacionalmente, continua sendo da empresa contratante.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tools" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Ferramentas de Apoio para Marketing</h2>
+                    <p class="mb-6 text-stone-600">Para complementar suas ações de marketing, existem diversas ferramentas online que podem auxiliar na prospecção de clientes e na promoção de seus produtos. Estas plataformas oferecem visibilidade e conexão com parceiros em potencial.</p>
+                    <div id="tools-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const toolsData = [
+                { name: 'Vitrine do Exportador', description: 'Serviço de vitrine virtual para que importadores possam encontrar sua empresa e enviar propostas.', link: 'http://www.vitrinedoexportador.gov.br/bens/ve/br' },
+                { name: 'Connect Americas', description: 'Rede social empresarial focada em comércio e investimento na América.', link: 'https://connectamericas.com/pt/' },
+                { name: 'B2B Trade Portal', description: 'Portal B2B que conecta micro, pequenas e médias empresas brasileiras a empresas internacionais.', link: 'https://b2brazil.com.br/' }
+            ];
+
+            const toolsListContainer = document.getElementById('tools-list');
+            toolsData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                toolsListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

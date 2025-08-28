@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Documentos Obrigatórios na Exportação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais e Habilitação (General concepts and the Radar/Siscomex process), 2) Documentos por Fase (Mandatory documents organized by phase), and 3) Recursos Úteis (Useful resources). This flow guides the user from foundational knowledge to the practical documents and phases of an export operation. Interactive elements include accordions to detail each document and phase. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts and importance of export documents. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Radar and Siscomex. Goal: Inform/Organize. Method: Accordions (HTML/JS) for each system. Justification: Organizes detailed information about these two crucial systems into a clean, easy-to-read format.
+        - Report Info: Documents by phase (negotiation, shipping, post-shipping). Goal: Inform/Organize. Method: Accordions for each phase, with sub-accordions for each document. Justification: Provides a structured, hierarchical view of the documents required at different stages.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Documentos Obrigatórios na Exportação</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo sobre procedimentos, documentos e sistemas para o comércio exterior.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Habilitação</button>
+            <button data-tab="documents" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Documentos por Fase</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Gerais e Habilitação</h2>
+                    <p class="mb-4 text-stone-600">As operações de comércio exterior são viabilizadas por uma série de documentos em diferentes estágios. A falta ou o preenchimento incorreto de um deles pode causar sérios prejuízos. A habilitação no sistema aduaneiro é o primeiro passo para garantir a legalidade das suas exportações.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Habilitação no Radar</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O Radar (Registro e Rastreamento da Atuação dos Intervenientes Aduaneiros) é o registro obrigatório na Receita Federal para empresas que desejam exportar. Funciona como uma chave de acesso ao Siscomex, garantindo a regularidade da empresa. Existem três modalidades: Expresso, Limitado e Ilimitado, com diferentes limites de valor para importação.</p>
+                                <p class="mt-2 text-stone-600">A habilitação torna-se inativa se, em 6 meses, a empresa não realizar nenhuma operação de comércio exterior.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Siscomex e Portal Único</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O Siscomex (Sistema Integrado de Comércio Exterior) é o sistema que controla e processa as operações no Brasil. É nele que os registros de exportação são realizados. O Portal Único de Comércio Exterior é parte integrante do Siscomex e seu uso é obrigatório para as exportações, centralizando informações e simplificando procedimentos.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Radar x Siscomex</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">A habilitação no Radar e o cadastro no Siscomex são etapas obrigatórias para a maioria das operações de exportação. No entanto, há dispensa de registro para exportações via Declaração Simplificada de Exportação (DSE) e remessas internacionais via Correios ou empresas de courier.</p>
+                                <p class="mt-2 text-stone-600">Não há custos diretos para se habilitar, mas é recomendável a ajuda de um profissional (contador ou despachante aduaneiro).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="documents" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Documentos por Fase da Exportação</h2>
+                    <p class="mb-4 text-stone-600">Os documentos de comércio exterior são exigidos em diferentes estágios do processo. É fundamental conhecê-los e preenchê-los corretamente para evitar problemas. Esta seção organiza os documentos de acordo com a fase da operação, da negociação ao pós-embarque.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Fase 1: Negociação</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <h4 class="font-semibold text-stone-800 mb-2">Fatura Pro-forma (Pro-forma invoice):</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Documento que inicia a negociação, funcionando como uma proposta comercial.</li>
+                                    <li>Deve conter dados do exportador e importador, descrição da mercadoria, preço, Incoterm, etc.</li>
+                                    <li>Uma vez aceita, formaliza a negociação.</li>
+                                </ul>
+                                <h4 class="font-semibold text-stone-800 mt-4 mb-2">Comprovante de Pagamento:</h4>
+                                <p>Pode ser enviado pelo importador após o aceite da fatura pro-forma, dependendo da modalidade de pagamento (antecipado ou carta de crédito).</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Fase 2: Embarque/Remessa</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <h4 class="font-semibold text-stone-800 mb-2">Fatura Comercial (Commercial invoice):</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Documento definitivo que formaliza a exportação, substituindo a Nota Fiscal (que tem validade interna).</li>
+                                    <li>Utilizada para o desembaraço aduaneiro no Brasil e no país do comprador.</li>
+                                </ul>
+                                <h4 class="font-semibold text-stone-800 mt-4 mb-2">Romaneio de Carga (Packing list):</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Descreve a carga, incluindo volumes, dimensões e peso, facilitando a localização de itens e a conferência aduaneira.</li>
+                                </ul>
+                                <h4 class="font-semibold text-stone-800 mt-4 mb-2">Declaração Única de Exportação (DU-E):</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Documento eletrônico que subsidia o despacho aduaneiro no Brasil. É obrigatório e unifica informações.</li>
+                                </ul>
+                                <h4 class="font-semibold text-stone-800 mt-4 mb-2">Nota Fiscal de Exportação:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Documento de transporte interno, emitido em moeda nacional, para a circulação da carga até o terminal de embarque.</li>
+                                </ul>
+                                <h4 class="font-semibold text-stone-800 mt-4 mb-2">Conhecimento de Embarque:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Emitido pela transportadora, atesta a contratação do serviço e serve como recibo de carga e título de propriedade.</li>
+                                </ul>
+                                <h4 class="font-semibold text-stone-800 mt-4 mb-2">Outros Documentos:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Certificado ou apólice de seguro.</li>
+                                    <li>Certificado de origem.</li>
+                                    <li>Legalização consular e certificados fitossanitários.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Fase 3: Pós-Embarque</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <h4 class="font-semibold text-stone-800 mb-2">Comprovante de Exportação (CE):</h4>
+                                <p class="mb-2">Documento oficial da Receita Federal que comprova o efetivo embarque da mercadoria.</p>
+                                <h4 class="font-semibold text-stone-800 mt-4 mb-2">Contrato de Câmbio:</h4>
+                                <p>Documento que formaliza a troca de divisa estrangeira por moeda nacional, permitindo o recebimento pela operação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre os procedimentos e documentos obrigatórios na exportação, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Manual de Habilitação no Siscomex', description: 'Guia completo para habilitar sua empresa no Siscomex.', link: 'https://www.gov.br/siscomex/pt-br/servicos/manuais/manual-siscomex-habilitacao' },
+                { name: 'Guia Aprendendo a Exportar', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' },
+                { name: 'Declaração Única de Exportação (DU-E)', description: 'Manual sobre a elaboração da DU-E.', link: 'https://www.gov.br/siscomex/pt-br/servicos/manuais/manual-siscomex-exportacao-web/du-e-manual-de-elaboracao' },
+                { name: 'Portal Único Siscomex', description: 'Portal que integra o registro e controle das operações de comércio exterior.', link: 'https://portalunico.siscomex.gov.br/' },
+                { name: 'Documentos necessários para exportar', description: 'Lista de documentos para empresas que desejam exportar.', link: 'https://www.gov.br/siscomex/pt-br/servicos/documentos-necessarios-para-a-empresa-que-deseja-exportar' },
+                { name: 'Manuais Siscomex', description: 'Coleção de manuais oficiais do Siscomex.', link: 'https://www.gov.br/siscomex/pt-br/servicos/manuais' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

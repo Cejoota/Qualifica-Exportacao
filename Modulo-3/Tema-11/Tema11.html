@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Transporte e Seguro Internacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais (General concepts and logistics flow), 2) Modais (Types of transport with pros/cons), 3) Contratação (How to hire a freight forwarder and what to provide), and 4) Seguro e Recursos (Insurance basics and useful links). This flow guides the user from foundational knowledge to practical steps for organizing transport and insurance. Interactive elements include accordions for each transport modal and insurance detail. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts of international transport. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Logistics flow. Goal: Inform/Organize. Method: A simple visual diagram using HTML/CSS. Justification: A visual representation of a process is more effective than a textual one.
+        - Report Info: Transport modes (road, rail, water, air, pipeline). Goal: Compare/Inform. Method: Accordions (HTML/JS) for each mode, detailing pros and cons. Justification: Organizes detailed information about each modal into a clean, easy-to-read format.
+        - Report Info: How to hire and pay for transport. Goal: Advise/Explain. Method: Bulleted lists. Justification: Provides clear, actionable advice on a practical process.
+        - Report Info: Insurance concepts and contracting. Goal: Inform/Advise. Method: Bulleted lists and text blocks. Justification: Clearly presents the crucial aspects of cargo insurance.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Transporte e Seguro Internacional</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo para entender o sistema logístico e de segurança para suas exportações.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Fluxo</button>
+            <button data-tab="modals" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Modais de Transporte</button>
+            <button data-tab="hiring" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Contratação e Pagamento</button>
+            <button data-tab="insurance" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Seguro e Recursos</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Gerais e Fluxo Logístico</h2>
+                    <p class="mb-4 text-stone-600">O transporte internacional de mercadorias é a atividade de coletar e entregar bens de forma segura, no tempo e local certos. O sistema logístico é complexo e afeta diretamente os custos da operação. Entender o fluxo é crucial para o planejamento da exportação.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Itens do Sistema de Transportes:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Modo:** A via de transporte (ex: rodoviário, aéreo).</li>
+                                <li>**Forma:** O relacionamento entre os vários modos de transporte.</li>
+                                <li>**Meio:** O elemento transportador (ex: caminhão, navio, avião).</li>
+                                <li>**Instalações:** Terminais de carga (ex: portos, aeroportos).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Fluxo Logístico da Exportação:</h3>
+                            <div class="mt-4 p-4 border border-stone-200 rounded-lg">
+                                <h4 class="font-bold text-lg text-blue-700 mb-2">Transporte Nacional:</h4>
+                                <div class="flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+                                    <div class="logistics-step">Local de Origem</div>
+                                    <span class="logistics-arrow">&rarr;</span>
+                                    <div class="logistics-step">Transporte Interno</div>
+                                    <span class="logistics-arrow">&rarr;</span>
+                                    <div class="logistics-step">Alfândega do Vendedor</div>
+                                    <span class="logistics-arrow">&rarr;</span>
+                                    <div class="logistics-step">Terminal de Origem</div>
+                                </div>
+                                <h4 class="font-bold text-lg text-blue-700 mt-4 mb-2">Transporte Internacional:</h4>
+                                <div class="flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+                                    <div class="logistics-step">Terminal de Destino</div>
+                                    <span class="logistics-arrow">&rarr;</span>
+                                    <div class="logistics-step">Alfândega do Comprador</div>
+                                    <span class="logistics-arrow">&rarr;</span>
+                                    <div class="logistics-step">Transporte Interno</div>
+                                    <span class="logistics-arrow">&rarr;</span>
+                                    <div class="logistics-step">Local de Destino</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="modals" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Principais Modais de Transporte</h2>
+                    <p class="mb-4 text-stone-600">A escolha do modal de transporte adequado é uma das decisões mais importantes na exportação. Ela deve ser baseada nas características do produto, na urgência da entrega e no custo. Clique em cada modal para ver as vantagens e desvantagens.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Rodoviário</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">É um dos modais mais simples. Adequado para curtas e médias distâncias. Oferece flexibilidade de percursos e a possibilidade de entrega "porta a porta".</p>
+                                <ul class="list-disc list-inside space-y-1 mt-2">
+                                    <li>**Vantagens:** Flexibilidade, simplicidade, agilidade em curtas distâncias.</li>
+                                    <li>**Desvantagens:** Alto custo operacional, menor capacidade de carga, elevado consumo de combustível.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Ferroviário</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Ideal para mercadorias de baixo valor agregado e em grandes quantidades. Sua eficiência energética e os fretes baixos o tornam competitivo em longas distâncias.</p>
+                                <ul class="list-disc list-inside space-y-1 mt-2">
+                                    <li>**Vantagens:** Eficiência energética, fretes baixos, capacidade para grandes volumes.</li>
+                                    <li>**Desvantagens:** Baixa flexibilidade de rotas, tempo de viagem irregular.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Aquaviário (Marítimo, Fluvial, Lacustre)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">É um modal bastante competitivo, com elevada capacidade de transporte e fretes mais baratos. O transporte marítimo, em particular, é o mais utilizado no comércio exterior.</p>
+                                <ul class="list-disc list-inside space-y-1 mt-2">
+                                    <li>**Vantagens:** Elevada capacidade, fretes mais baratos, baixo consumo de combustível.</li>
+                                    <li>**Desvantagens:** Baixa velocidade, limitações geográficas (fluvial/lacustre).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Aéreo</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O modal mais rápido, indicado para mercadorias de alto valor agregado, pequenos volumes ou com urgência na entrega. Oferece alta segurança e confiabilidade, mas tem um custo elevado.</p>
+                                <ul class="list-disc list-inside space-y-1 mt-2">
+                                    <li>**Vantagens:** Rapidez, segurança, ideal para mercadorias urgentes.</li>
+                                    <li>**Desvantagens:** Fretes elevados, menor capacidade de carga, não atende a granéis.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Dutoviário</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Transporte de granéis (sólidos, líquidos ou gasosos) através de dutos. É um modal especializado e contínuo, como oleodutos, gasodutos e minerodutos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="hiring" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Contratação e Pagamento do Transporte</h2>
+                    <p class="mb-4 text-stone-600">A contratação do transporte internacional é feita através de agentes de carga, que atuam como intermediários especializados. É essencial saber o que informar ao solicitar uma cotação e entender as formas de pagamento do frete.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Informações para a Cotação:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>Local de coleta, embarque, desembarque e entrega da carga.</li>
+                                <li>Peso, dimensões e quantidade de volumes.</li>
+                                <li>Data de coleta e embarque requerida.</li>
+                                <li>Incoterm utilizado e descrição detalhada da mercadoria.</li>
+                                <li>Informações adicionais sobre transporte e armazenamento (temperatura, perecibilidade, etc.).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Formas de Pagamento do Frete:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Prepaid:** Frete pago no local de embarque, antes da saída da mercadoria.</li>
+                                <li>**Collect:** Frete a pagar no destino, após o embarque.</li>
+                                <li>**Prepaidabroad:** Frete pago após o embarque, mas antes da chegada no destino.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="insurance" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Seguro Internacional</h2>
+                    <p class="mb-4 text-stone-600">A contratação de um seguro de transporte é uma precaução essencial para proteger a carga de riscos e custos não planejados. A responsabilidade pelo seguro é definida pelos Incoterms® e o preço varia conforme o tipo de mercadoria, embalagem e destino.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Partes Envolvidas:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Contratante:** O dono da carga.</li>
+                                <li>**Corretora:** Intermediária da operação.</li>
+                                <li>**Seguradora:** A empresa que assume o risco.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Documentação do Seguro:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Apólice:** Contrato de seguro para uma operação específica.</li>
+                                <li>**Certificado de seguro:** Substitui a apólice em seguros de longo prazo (abertos).</li>
+                                <li>**Endosso:** Documento que corrige erros ou omissões em uma apólice.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Recursos Úteis:</h3>
+                            <div id="resources-list" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'https://www.gov.br/siscomex/pt-br/servicos/aprendendo-a-exportar' },
+                { name: 'Agência Nacional de Transportes Terrestres (ANTT)', description: 'Informações sobre transporte terrestre internacional.', link: 'http://www.antt.gov.br/passageiros/Transporte_Internacional.html' },
+                { name: 'Agência Nacional de Aviação Civil (ANAC)', description: 'Informações sobre o transporte aéreo.', link: 'https://anac.gov.br/' },
+                { name: 'Agência Nacional de Transportes Aquaviários (ANTAQ)', description: 'Informações sobre o transporte marítimo e fluvial.', link: 'http://portal.antaq.gov.br/' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

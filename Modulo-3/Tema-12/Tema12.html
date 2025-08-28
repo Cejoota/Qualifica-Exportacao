@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de Incentivos Fiscais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais (General concepts), 2) Incentivos (Incentives for each tax type), 3) Regimes Especiais (Special regimes like Reintegra and Recap), and 4) Recursos Úteis (Useful resources). This flow progresses from foundational knowledge to specific tax details and special regimes, making the content easily digestible and actionable. Interactive elements include accordions to detail each tax incentive and special regime. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts of tax incentives. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Tax desonerations (ICMS, IPI, PIS/COFINS). Goal: Inform/Organize. Method: Accordions (HTML/JS) for each tax, detailing their non-incidence or immunity. Justification: Organizes dense tax information into a clean, easy-to-read format.
+        - Report Info: Special regimes (Reintegra, Recap, Sisprom). Goal: Inform. Method: Accordions for each regime, explaining its purpose and requirements. Justification: Presents complex legal regimes in a structured format.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Incentivos Fiscais à Exportação</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo sobre a desoneração de tributos e regimes especiais para exportadores.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Conceitos</button>
+            <button data-tab="incentives" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Incentivos por Imposto</button>
+            <button data-tab="regimes" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Regimes Especiais</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Gerais e Conceitos Fundamentais</h2>
+                    <p class="mb-4 text-stone-600">A desoneração de tributos sobre as exportações é uma prática mundial para aumentar a competitividade dos produtos no mercado exterior. Esta seção explica o que são incentivos fiscais e os conceitos-chave por trás das desonerações tributárias.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Conceitos Fundamentais:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Não Incidência:** Não há fator gerador para a cobrança do tributo.</li>
+                                <li>**Imunidade:** Vedação constitucional à aplicação do tributo.</li>
+                                <li>**Isenção:** Dispensa de pagamento do tributo, mesmo com a existência do fator gerador.</li>
+                                <li>**Alíquota Zero:** Existe a tributação, mas a alíquota aplicada é de 0%.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Vantagens dos Incentivos Fiscais:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>Aumentam a competitividade dos produtos no exterior.</li>
+                                <li>Compensam custos adicionais de transporte, frete e seguro internacionais.</li>
+                                <li>Aumentam a confiança e motivação das empresas para exportar.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="incentives" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Incentivos por Tipo de Imposto</h2>
+                    <p class="mb-4 text-stone-600">Para incentivar as exportações, o governo concede a desoneração de diversos tributos. Esta seção detalha como cada um dos principais impostos é tratado nas operações de exportação.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Imposto de Exportação (IE)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">A regra geral é a aplicação de alíquota zero para a maioria dos produtos. O imposto incide sobre a saída do produto do território nacional e é cobrado apenas para produtos específicos como cigarros, couros e peles.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Imposto sobre Circulação de Mercadorias e Serviços (ICMS)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Nas exportações, há imunidade ou não incidência de ICMS. Este benefício pode ser estendido à aquisição de insumos, gerando créditos fiscais de ICMS para a empresa.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Imposto sobre Produtos Industrializados (IPI)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Produtos industrializados destinados à exportação são imunes à incidência de IPI. A imunidade também se estende à aquisição de insumos, gerando créditos presumidos de IPI para ressarcimento de PIS/PASEP e COFINS.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>PIS/PASEP e COFINS</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">As receitas de exportação de mercadorias são isentas de PIS/PASEP e COFINS. Empresas que apuram pelo sistema não cumulativo têm direito ao crédito (recuperação) dos impostos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="regimes" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Regimes Especiais</h2>
+                    <p class="mb-4 text-stone-600">O governo brasileiro oferece regimes especiais para incentivar ainda mais as empresas exportadoras, através de benefícios específicos para a cadeia produtiva e a aquisição de bens. Esta seção detalha os principais regimes especiais e suas finalidades.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Reintegra</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Regime para devolver, parcial ou integralmente, os custos tributários federais remanescentes nas cadeias de produção de bens exportados. Os créditos concedidos podem ser usados para compensar outros tributos federais.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Recap</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Regime para empresas preponderantemente exportadoras que suspende a cobrança de PIS/PASEP e COFINS na aquisição de bens de capital para o ativo imobilizado.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Sisprom</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Instrumento que prevê a redução a zero da alíquota do Imposto de Renda (IR) para pagamentos de despesas com promoção comercial no exterior, como aluguel de estandes, propaganda e pesquisa de mercado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis e Links</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre os incentivos fiscais e consultar a legislação, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Imposto de Exportação (RFB)', description: 'Informações sobre o Imposto de Exportação.', link: 'http://receita.economia.gov.br/acesso-rapido/tributos/imposto-exportacao' },
+                { name: 'Reintegra', description: 'Informações sobre o Regime Especial de Reintegração de Valores Tributários.', link: 'http://receita.economia.gov.br/acesso-rapido/legislacao/legislacao-por-assunto/copy2_of_IRPJ-Incentivos-Fiscais' },
+                { name: 'Recap', description: 'Informações sobre o Regime especial de aquisição de bens de capital para empresas exportadoras.', link: 'http://receita.economia.gov.br/acesso-rapido/legislacao/legislacao-por-assunto/recap' },
+                { name: 'Sisprom', description: 'Portal para registro de operações de promoção comercial no exterior.', link: 'https://sisprom.mdic.gov.br/public/portal' },
+                { name: 'Perguntas e Respostas - Simples Nacional', description: 'Manual com perguntas e respostas sobre o Simples Nacional.', link: 'http://www8.receita.fazenda.gov.br/Simples Nacional/Arquivos/manual/PerguntaoSN.pdf' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' },
+                { name: 'Legislação por Assunto - RFB', description: 'Legislação tributária federal por assunto.', link: 'http://receita.economia.gov.br/acesso-rapido/legislacao/legislacao-por-assunto' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

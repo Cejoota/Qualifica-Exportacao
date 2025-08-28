@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspectos Operacionais da Exportação Indireta (II)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the operational details of indirect exporting into three key areas: 1) Noções Gerais e Nota Fiscal (General concepts and invoice details), 2) Radar e Siscomex (How these systems apply to indirect export), and 3) Confirmação e Recursos (Export confirmation and useful resources). This flow progresses from document-specific details to system-level procedures and confirmation processes, making the content easily digestible and actionable. Interactive elements include accordions to detail each topic. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General operational aspects and common questions. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Details on the export invoice (Nota Fiscal). Goal: Inform/Organize. Method: Accordions (HTML/JS) to detail CFOP codes, responsibilities, and key information required. Justification: Organizes dense and technical information into a clean, easy-to-read format.
+        - Report Info: How Radar and Siscomex apply to indirect export. Goal: Inform. Method: Accordions for each system, explaining how the roles of exporter and declarer change. Justification: Clarifies the specific procedures for indirect exports within these crucial systems.
+        - Report Info: Confirmation process. Goal: Inform/Explain. Method: A text block describing the electronic event and averbamento. Justification: Clearly explains the final step of the process.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Aspectos Operacionais da Exportação Indireta (II)</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um guia detalhado sobre procedimentos fiscais e documentação na exportação indireta.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Nota Fiscal</button>
+            <button data-tab="systems" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Radar e Siscomex</button>
+            <button data-tab="confirmation" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Confirmação e Recursos</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Nota Fiscal de Exportação Indireta</h2>
+                    <p class="mb-4 text-stone-600">A emissão da nota fiscal na exportação indireta tem particularidades importantes. É essencial entender os tipos de CFOP (Código Fiscal de Operações e de Prestações) e a responsabilidade de cada parte para garantir que a operação fiscal seja realizada corretamente e que a empresa produtora receba os benefícios fiscais.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Emissão e CFOP</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">A venda do produtor para o intermediário é feita com uma nota fiscal de saída interna, do tipo "remessa com fim específico de exportação", utilizando os CFOP 5501, 5502, 6501 ou 6502.</p>
+                                <p class="mt-2 text-stone-600">O intermediário (trading company ou ECE) é quem emite a nota fiscal de exportação, utilizando o CFOP 7501, que permite referenciar a nota fiscal do produtor na DU-E.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Informações na Nota Fiscal</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">A nota fiscal de remessa deve conter o local de entrega da mercadoria (o local de embarque ou entreposto aduaneiro). A nota de exportação emitida pelo intermediário deve referenciar os dados da nota do produtor nos campos "Informações complementares" e "refNFe".</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Aspectos Fiscais</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">As notas fiscais de exportação devem destacar as normas vigentes que amparam os benefícios fiscais (imunidade de IPI e não incidência de ICMS). É crucial que a legislação de cada estado seja observada, pois os procedimentos podem variar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="systems" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Radar, Siscomex e DU-E na Exportação Indireta</h2>
+                    <p class="mb-4 text-stone-600">O uso de sistemas como Radar, Siscomex e a Declaração Única de Exportação (DU-E) na exportação indireta depende da modalidade de contratação. É fundamental entender as regras para evitar problemas no registro e garantir a correta comprovação da operação. Clique para saber mais sobre as particularidades de cada sistema.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Radar e Siscomex</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Se a empresa produtora opta pela modalidade de **compra e venda**, não precisa estar habilitada no Radar e Siscomex, pois a exportação é feita pelo intermediário. No entanto, se o contrato for de **representação comercial**, a produtora precisa da habilitação, pois ela é a exportadora.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Declaração Única de Exportação (DU-E)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Na DU-E, a empresa produtora figura apenas como emitente das notas fiscais de remessa, não sendo a exportadora ou declarante. O declarante (intermediário ou despachante) deve referenciar a nota fiscal de remessa na nota fiscal de exportação e na DU-E. Isso é crucial para que ambas as notas recebam o evento de averbação da exportação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="confirmation" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Confirmação da Exportação e Recursos</h2>
+                    <p class="mb-4 text-stone-600">A confirmação da exportação é o passo final que garante a validade da operação para fins fiscais. O processo é automatizado e gera um evento eletrônico no SPED, o que simplificou o procedimento para os intermediários. Utilize os recursos a seguir para aprofundar seu conhecimento sobre o tema.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Processo de Confirmação</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Após a averbação do embarque, um evento eletrônico é gerado e enviado ao SPED, registrando a quantidade exportada e as datas de embarque. Desde a atualização do Convênio ICMS 203/2017, o intermediário não precisa mais apresentar o Memorando de Exportação para comprovação da operação.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mt-6 mb-2">Links Úteis:</h3>
+                            <div id="resources-list" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Decreto Lei nº 1.248, de 1972', description: 'Decreto que reconhece as empresas comerciais exportadoras.', link: 'http://www.planalto.gov.br/ccivil_03/decreto-lei/Del1248.htm' },
+                { name: 'Trading Company x ECE (Ministério da Economia)', description: 'Informações oficiais sobre a diferença entre trading companies e empresas comerciais exportadoras.', link: 'http://www.mdic.gov.br/index.php/comercio-exterior/empresa-comercial-exportadora-trading-company' },
+                { name: 'Exportação Indireta e Formas de Exportação (RFB)', description: 'Manual da Receita Federal sobre exportação indireta e suas modalidades.', link: 'http://receita.economia.gov.br/orientacao/aduaneira/manuais/exportacao-portal-unico/situacoes-especiais-na-exportacao/exportacao-indireta' },
+                { name: 'CECIEX', description: 'Portal do Conselho Brasileiro das Empresas Comerciais Exportadoras e Importadoras.', link: 'http://www.ceciex.com.br/' },
+                { name: 'Catálogo de ECEs e Trading Companies do Brazilian Suppliers', description: 'Diretório de empresas intermediárias para exportação.', link: 'http://www.braziliansuppliers.com.br/' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

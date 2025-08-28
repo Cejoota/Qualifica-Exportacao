@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de Exportação Indireta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the process of indirect exporting into four key areas: 1) Visão Geral (General Overview), 2) Serviços e Vantagens (Services and Advantages), 3) Comparativo de Intermediários (Intermediary Comparison), and 4) Recursos Úteis (Useful Resources). This flow progresses from general concepts to a detailed comparison of intermediary types, enhancing usability and engagement. Interactive elements include a toggle for advantages/desadvantages and an accordion for the intermediary comparison. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Characteristics of indirect export. Goal: Inform. Method: Text blocks and bullet points. Justification: Clear and concise.
+        - Report Info: Services offered by intermediaries. Goal: Inform/Organize. Method: A detailed list of services. Justification: Presents a comprehensive view of the support available.
+        - Report Info: Advantages and disadvantages. Goal: Compare/Highlight. Method: A toggle switch (HTML/JS) to show either a list of advantages or disadvantages. Justification: Creates an engaging, interactive way to compare pros and cons side-by-side.
+        - Report Info: Trading Company vs. ECE. Goal: Compare. Method: An accordion (HTML/JS) that expands to show a comparative table. Justification: Organizes detailed legal and operational differences without cluttering the main page.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Exportação Indireta</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Compreenda as características, vantagens e desvantagens de terceirizar a sua exportação.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="overview" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Visão Geral</button>
+            <button data-tab="services" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Serviços e Vantagens</button>
+            <button data-tab="comparison" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Comparativo de Intermediários</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">O que é Exportação Indireta?</h2>
+                    <p class="mb-4 text-stone-600">A exportação indireta é uma modalidade onde a sua empresa terceiriza, parcial ou totalmente, a comercialização internacional dos seus produtos. Essa terceirização é feita através de intermediários especializados em comércio exterior, como as "trading companies" ou "Empresas Comerciais Exportadoras (ECEs)".</p>
+                    <div class="space-y-4 text-stone-700">
+                        <h3 class="text-xl font-semibold text-blue-600">Características Principais:</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>O serviço é prestado por empresas intermediárias localizadas no mercado doméstico.</li>
+                            <li>É uma boa opção para empresas que estão iniciando as vendas internacionais ou que desejam diversificar mercados.</li>
+                            <li>Os intermediários atuam como um departamento de exportação terceirizado, com expertise em diversos mercados.</li>
+                            <li>Esta modalidade pode ser usada em conjunto com a exportação direta.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Serviços, Vantagens e Desvantagens</h2>
+                    <p class="mb-6 text-stone-600">Conheça os serviços oferecidos pelos intermediários e avalie os prós e contras da exportação indireta. Utilize o seletor abaixo para alternar entre as vantagens e desvantagens desta modalidade.</p>
+                    
+                    <div class="flex items-center justify-center mb-6">
+                        <span id="label-vantagens" class="font-semibold text-green-600">Vantagens</span>
+                        <div class="relative inline-block w-10 mx-4 align-middle select-none transition duration-200 ease-in-out">
+                            <input type="checkbox" name="toggle" id="toggle-pros-cons" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
+                            <label for="toggle-pros-cons" class="toggle-label block overflow-hidden h-6 rounded-full bg-green-200 cursor-pointer"></label>
+                        </div>
+                        <span id="label-desvantagens" class="font-semibold text-stone-600">Desvantagens</span>
+                    </div>
+
+                    <div id="services-list" class="space-y-4">
+                        <h3 class="text-xl font-semibold text-blue-600">Serviços Ofertados:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li>Prospecção de mercados e captação de clientes internacionais.</li>
+                            <li>Promoção comercial (feiras, rodadas de negócio).</li>
+                            <li>Negociação com compradores internacionais, considerando aspectos culturais e de língua.</li>
+                            <li>Gestão das vendas internacionais e orientação sobre procedimentos (operacionais, aduaneiros, logísticos).</li>
+                            <li>Orientação sobre materiais promocionais e embalagem para mercados internacionais.</li>
+                        </ul>
+                    </div>
+
+                    <div id="pros-cons-container" class="mt-8">
+                        <div id="vantagens-content">
+                            <h3 class="text-xl font-semibold text-green-600 mb-2">Vantagens da Exportação Indireta:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Especialização:** A empresa pode focar na produção, enquanto o intermediário cuida dos aspectos comerciais e operacionais.</li>
+                                <li>**Experiência:** Beneficia-se da expertise do operador em comércio exterior.</li>
+                                <li>**Redução de riscos:** Reduz tempo, custo e risco para a empresa exportadora.</li>
+                                <li>**Ampla rede:** Acesso à rede de compradores e distribuidores já estabelecida pelo intermediário.</li>
+                                <li>**Melhores condições:** Intermediários podem negociar melhores custos logísticos devido ao grande volume de operações.</li>
+                            </ul>
+                        </div>
+                        <div id="desvantagens-content" class="hidden">
+                            <h3 class="text-xl font-semibold text-red-600 mb-2">Desvantagens da Exportação Indireta:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Menor controle:** A empresa tem menos controle sobre a operação de comércio exterior e pós-venda.</li>
+                                <li>**Falta de contato direto:** Não há contato direto com os clientes, resultando em menor conhecimento sobre o mercado.</li>
+                                <li>**Perda de margem:** A empresa pode ter uma perda de margem de lucro devido ao uso de um intermediário.</li>
+                                <li>**Risco de concorrência:** Possibilidade de o intermediário oferecer produtos concorrentes aos mesmos clientes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="comparison" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Trading Company x ECE</h2>
+                    <p class="mb-6 text-stone-600">Embora ambas atuem como intermediários, existem diferenças legais e operacionais entre uma Trading Company e uma Empresa Comercial Exportadora (ECE). O quadro a seguir detalha as principais distinções para ajudá-lo a entender qual tipo de intermediário pode ser mais adequado para o seu negócio.</p>
+                    <div class="accordion-item">
+                        <button class="accordion-button">
+                            <span>Exibir Comparativo Completo</span>
+                            <span class="arrow">&#9662;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <table class="w-full text-left border-collapse mt-2 text-sm">
+                                <thead>
+                                    <tr class="bg-stone-100">
+                                        <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Característica</th>
+                                        <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Trading Company</th>
+                                        <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">ECEs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="p-2">Regulamentação</td>
+                                        <td class="p-2">Decreto-Lei 1.248/72</td>
+                                        <td class="p-2">Mesma legislação de qualquer empresa comercial/industrial</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="p-2">Registro Especial</td>
+                                        <td class="p-2">Necessita de Certificado de Registro Especial na SECEX e RFB</td>
+                                        <td class="p-2">Não precisa de Certificado de Registro Especial</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="p-2">Forma Societária</td>
+                                        <td class="p-2">Sociedade por ações</td>
+                                        <td class="p-2">Qualquer forma societária</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="p-2">Capital Social</td>
+                                        <td class="p-2">Capital social mínimo exigido</td>
+                                        <td class="p-2">Não há capital social mínimo</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2">Impostos na Venda</td>
+                                        <td class="p-2">Vendas com isenção de impostos</td>
+                                        <td class="p-2">Vendas com suspensão de impostos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="mt-4 text-stone-600">**Atenção:** Em caso de não efetivação das exportações nos prazos de 90 ou 180 dias, a empresa produtora ficará sujeita ao recolhimento dos impostos devidos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis e Links</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre exportação indireta e encontrar intermediários, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const toggleCheckbox = document.getElementById('toggle-pros-cons');
+            const vantagensContent = document.getElementById('vantagens-content');
+            const desvantagensContent = document.getElementById('desvantagens-content');
+            const vantagensLabel = document.getElementById('label-vantagens');
+            const desvantagensLabel = document.getElementById('label-desvantagens');
+            const accordionButton = document.querySelector('#comparison .accordion-button');
+            const accordionContent = document.querySelector('#comparison .accordion-content');
+            const accordionArrow = document.querySelector('#comparison .arrow');
+
+            const resourcesData = [
+                { name: 'Exportação Indireta e Formas de Exportação (RFB)', description: 'Manual da Receita Federal sobre exportação indireta e suas modalidades.', link: 'http://receita.economia.gov.br/orientacao/aduaneira/manuais/exportacao-portal-unico/situacoes-especiais-na-exportacao/exportacao-indireta' },
+                { name: 'Trading Company x ECE (Ministério da Economia)', description: 'Informações oficiais sobre a diferença entre trading companies e empresas comerciais exportadoras.', link: 'http://www.mdic.gov.br/index.php/comercio-exterior/empresa-comercial-exportadora-trading-company' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            toggleCheckbox.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    vantagensContent.classList.add('hidden');
+                    desvantagensContent.classList.remove('hidden');
+                    vantagensLabel.classList.remove('text-green-600');
+                    vantagensLabel.classList.add('text-stone-600');
+                    desvantagensLabel.classList.remove('text-stone-600');
+                    desvantagensLabel.classList.add('text-red-600');
+                } else {
+                    desvantagensContent.classList.add('hidden');
+                    vantagensContent.classList.remove('hidden');
+                    desvantagensLabel.classList.remove('text-red-600');
+                    desvantagensLabel.classList.add('text-stone-600');
+                    vantagensLabel.classList.remove('text-stone-600');
+                    vantagensLabel.classList.add('text-green-600');
+                }
+            });
+
+            accordionButton.addEventListener('click', () => {
+                const isExpanded = accordionButton.classList.toggle('active');
+                if (isExpanded) {
+                    accordionContent.style.display = 'block';
+                } else {
+                    accordionContent.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

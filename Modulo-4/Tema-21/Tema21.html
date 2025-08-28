@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Financiamento às Exportações</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais e Modalidades (General concepts and types of financing), 2) Financiamentos Pré-Embarque (Pre-shipment financing examples), 3) Financiamentos Pós-Embarque (Post-shipment financing examples), and 4) Recursos Úteis (Useful resources). This flow guides the user from foundational knowledge to specific financing options, making the content easily digestible and actionable. Interactive elements include accordions to detail each financing example. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts and benefits of export financing. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Pre-shipment and post-shipment financing. Goal: Inform/Organize. Method: Accordions (HTML/JS) for each type, detailing examples like BNDES-Exim and Proger. Justification: Organizes detailed information about each financing option into a clean, easy-to-read format.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Financiamento às Exportações</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo sobre linhas de crédito para financiar a produção e a comercialização de produtos no exterior.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Modalidades</button>
+            <button data-tab="pre" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Financiamentos Pré-Embarque</button>
+            <button data-tab="post" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Financiamentos Pós-Embarque</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Gerais e Benefícios</h2>
+                    <p class="mb-4 text-stone-600">O financiamento à exportação é um recurso vital para empresas que buscam competitividade e capital de giro. Ele subsidia as exportações nas fases de produção e comercialização, promovendo vantagens como ganho de produtividade, estímulo à inovação e ampliação da competitividade no mercado internacional.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Benefícios do Financiamento:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>Ganhos de produtividade e escala.</li>
+                                <li>Estímulo à inovação e à qualificação da mão de obra.</li>
+                                <li>Fortalecimento da competitividade e inserção no mercado global.</li>
+                                <li>Estabilidade frente às flutuações do mercado.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Modalidades Básicas:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Pré-embarque:** O crédito é concedido na fase de produção, para a aquisição de fatores de produção.</li>
+                                <li>**Pós-embarque:** O crédito é concedido na fase de comercialização, após a mercadoria já ter sido embarcada.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pre" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Financiamentos Pré-Embarque</h2>
+                    <p class="mb-4 text-stone-600">Estes financiamentos são concedidos na fase de produção, fornecendo capital de giro para a aquisição de insumos e despesas operacionais. A maioria das linhas é subsidiada por instituições de fomento, mas a contratação é feita por meio de agentes financeiros.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>BNDES-Exim Pré-embarque</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O exportador solicita o financiamento a um agente financeiro credenciado. O agente assume o risco de crédito e o BNDES homologa a operação. O capital de giro é usado para produzir os bens, que depois são exportados.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Proger Exportação</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Linha de financiamento destinada a micro e pequenas empresas (faturamento anual de até R$ 10 milhões). Apoia a produção e também despesas de promoção comercial (feiras, missões, etc.). A contratação é feita diretamente com o Banco do Brasil ou Caixa Econômica Federal.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>ACC - Adiantamento sobre Contratos de Câmbio</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Mecanismo que permite ao exportador obter capital de giro adiantado (em reais) antes do embarque da mercadoria, com a exportação futura como garantia. O embarque pode acontecer em até 360 dias.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="post" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Financiamentos Pós-Embarque</h2>
+                    <p class="mb-4 text-stone-600">Estes financiamentos são concedidos na fase de comercialização, após a mercadoria já ter sido exportada. Eles oferecem apoio para a venda de bens brasileiros no exterior e ajudam a manter a estabilidade financeira da empresa exportadora.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>BNDES-Exim Pós-embarque</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Apoia a comercialização de bens brasileiros no exterior por meio de bancos estrangeiros. O BNDES desembolsa o valor em reais para o exportador no Brasil, enquanto o importador estrangeiro paga ao BNDES através de um banco mandatário.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Proex</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O Proex possui duas modalidades: **Financiamento** (apoio direto ao exportador ou importador, com foco em micro, pequenas e médias empresas) e **Equalização** (linha de financiamento que arca com parte dos juros, tornando as taxas equivalentes às internacionais). A contratação é feita diretamente pelo Banco do Brasil.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>ACE - Adiantamento sobre Cambiais de Exportação</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Mecanismo de financiamento contratado após o embarque, para antecipar o recebimento dos recursos em moeda nacional. A empresa transfere os direitos sobre a venda a prazo para o banco e fixa a taxa de câmbio da operação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre financiamentos e linhas de crédito para a exportação, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Apoio à exportação - BNDES', description: 'Informações detalhadas sobre as linhas de crédito do BNDES para a exportação.', link: 'https://www.bndes.gov.br/wps/portal/site/home/onde-atuamos/exportacao/como-funciona-apoio-exportacao' },
+                { name: 'Proger Exportação - Banco do Brasil', description: 'Detalhes sobre a linha de financiamento Proger Exportação.', link: 'https://www.bb.com.br/pbb/pagina-inicial/empresas/produtos-e-servicos/comercio-exterior/vendas-para-o-exterior/proger-exportacao#/' },
+                { name: 'Proex - Camex', description: 'Informações sobre o Programa de Financiamento às Exportações (Proex).', link: 'http://www.camex.gov.br/financiamento-e-garantia-as-exportacoes/programa-de-financiamento-as-exportacoes-proex' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' },
+                { name: 'SEBRAE Nacional', description: 'Portal com informações e apoio para micro e pequenas empresas.', link: 'https://www.sebrae.com.br/' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

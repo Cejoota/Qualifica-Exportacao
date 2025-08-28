@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia para Encontrar Clientes Internacionais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Básicas (Fundamental concepts), 2) Estratégias (Marketing strategies), and 3) Ferramentas e Links (Useful tools and links). This flow progresses from a theoretical understanding of international marketing to practical implementation steps, guiding the user through the process of being found by international clients. Interactive elements include accordions and a bar chart. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Stages of international marketing. Goal: Inform/Organize. Method: Accordion (HTML/JS) for each stage. Justification: Organizes a linear progression of information into an easily digestible and interactive format.
+        - Report Info: Benefits/drawbacks of websites. Goal: Inform. Method: Bulleted lists. Justification: Clearly presents pros and cons.
+        - Report Info: Digital payment stats. Goal: Inform. Method: Bar chart (Chart.js) to show transaction methods. Justification: A visual representation of data is more impactful than a static table. The chart is dynamic and helps to reinforce the importance of having an online presence.
+        - Report Info: Marketing materials and SEO. Goal: Inform/Advise. Method: Bulleted lists with key points. Justification: Provides clear, actionable advice.
+        - Report Info: Useful tools and links. Goal: Inform/Provide access. Method: A grid of clickable cards. Justification: Visually appealing and functional for a list of links.
+        - Library/Method: Vanilla JS for all interactions and Chart.js for the bar chart.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Como Ser Encontrado por Clientes Internacionais</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Guia prático sobre marketing internacional e prospecção digital para exportadores.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Básicas</button>
+            <button data-tab="strategies" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Estratégias de Marketing</button>
+            <button data-tab="tools" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Ferramentas e Links</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Básicas de Marketing Internacional</h2>
+                    <p class="mb-4 text-stone-600">O marketing internacional é uma ferramenta competitiva essencial para buscar novos negócios no exterior. O trabalho é complexo e desafiador devido às constantes mudanças e diferenças culturais. É importante que a sua empresa tenha um plano de marketing direcionado especificamente aos mercados estrangeiros.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Estágios do Marketing Internacional</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-2">
+                                    <li>**Marketing Internacional Indireto:** A empresa não busca ativamente clientes no exterior, mas seus produtos são comercializados por intermediários.</li>
+                                    <li>**Marketing Internacional Infrequente:** A empresa utiliza mercados externos apenas em períodos de excedente de produção.</li>
+                                    <li>**Marketing Internacional Regular:** A empresa tem capacidade permanente para atender o mercado externo de forma planejada.</li>
+                                    <li>**Marketing Internacional:** A empresa está totalmente comprometida e envolvida em ações de marketing internacional de forma contínua.</li>
+                                    <li>**Marketing Global:** A empresa trata o mundo como um mercado único, buscando a máxima eficiência em custos, produção e marketing.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Como ser encontrado por clientes</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Para que seus produtos sejam conhecidos, é necessário investir em marketing internacional, incluindo:</p>
+                                <ul class="list-disc list-inside space-y-2">
+                                    <li>Ações de marketing digital e SEO.</li>
+                                    <li>Website em outro idioma.</li>
+                                    <li>Materiais promocionais traduzidos.</li>
+                                    <li>Utilização de redes sociais.</li>
+                                    <li>Presença em marketplaces.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="strategies" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Estratégias de Marketing Digital</h2>
+                    <p class="mb-4 text-stone-600">O marketing digital é uma das formas mais eficazes para encontrar clientes internacionais. Permite uma alta segmentação, grande alcance e a possibilidade de mensuração. A seguir, detalhamos as principais estratégias e canais.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Website em Língua Estrangeira</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Um website em outro idioma é essencial para que compradores potenciais conheçam seus produtos. Ele promove publicidade dinâmica, fortalece a marca e permite a inclusão digital da empresa.</p>
+                                <h4 class="font-semibold mt-4">Vantagens:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Comunicação personalizada e fortalecimento da marca.</li>
+                                    <li>Online 24x7.</li>
+                                    <li>Possibilita marketing de conteúdo e métricas.</li>
+                                </ul>
+                                <h4 class="font-semibold mt-4">Cuidados:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Alto custo inicial e de manutenção, incluindo SEO.</li>
+                                    <li>Requer tradução de qualidade e criação de conteúdo.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Materiais Promocionais Traduzidos</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Ter materiais traduzidos é fundamental. Inclua apresentações, catálogos, folders e cartões de visita. É importante considerar as medidas e unidades de peso do mercado-alvo e garantir uma tradução de qualidade.</p>
+                                <h4 class="font-semibold mt-4">Pontos de Atenção:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Uso de storytelling e destaque para diferenciais.</li>
+                                    <li>Linguagem clara, coerente e concisa.</li>
+                                    <li>Tradução e revisão por profissionais.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Redes Sociais e Marketplaces</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Redes sociais são canais de comunicação poderosos para relacionamento e vendas. É necessário ter uma estratégia específica para cada rede e considerar a participação em redes de nicho. Marketplaces funcionam como distribuidores virtuais, gerando tráfego intenso e sendo eficientes para estratégias B2C.</p>
+                                <h4 class="font-semibold mt-4">Cuidados com Marketplaces:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Acirrada competição por preço.</li>
+                                    <li>Pouca diferenciação por marca.</li>
+                                    <li>Comissionamento por venda.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Estratégias de SEO</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O SEO (Search Engine Optimization) melhora o ranqueamento de sites e redes sociais em buscadores. Ferramentas como Google Ads, Google Analytics e Google Trends são essenciais para otimizar a sua presença digital e direcionar o marketing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tools" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Ferramentas e Links Úteis</h2>
+                    <p class="mb-6 text-stone-600">Explore diversas ferramentas para prospectar clientes, encontrar parceiros e obter informações sobre o mercado internacional. Esta seção lista os principais recursos para auxiliar sua empresa a ser encontrada.</p>
+                    <div id="resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Connect Americas', description: 'Rede social empresarial para comércio e investimento nas Américas.', link: 'https://connectamericas.com/en' },
+                { name: 'B2B Trade Portal', description: 'Portal B2B para conectar empresas brasileiras com o mercado internacional.', link: 'https://www.bb.com.br/portalbb/page44,3389,2249,0,0,1,2.bb' },
+                { name: 'Sustainability Map (ITC)', description: 'Plataforma para entender o cenário de sustentabilidade e se conectar a parceiros.', link: 'https://www.sustainabilitymap.org/' },
+                { name: 'Importers Data (Global Negotiator)', description: 'Dados sobre importadores por produto e país (serviço pago).', link: 'https://www.globalnegotiator.com/en/international-trade-databases/importers/' },
+                { name: 'Catálogo de empresas estrangeiras', description: 'Lista de contato de compradores estrangeiros por categoria de produtos.', link: 'https://investexportbrasil.dpr.gov.br/Empresas Estrangeiras/Busca/frmBuscaEmpresas Estrangeira.aspx' },
+                { name: 'Concorrências públicas internacionais', description: 'Acompanhe projetos e licitações internacionais de interesse empresarial.', link: 'http://www.investexportbrasil.gov.br/concorrencias-publicas-internacionais' },
+                { name: 'Google', description: 'Mecanismo de busca abrangente para prospecção de clientes internacionais.', link: 'https://www.google.com.br/' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'https://www.gov.br/siscomex/pt-br/servicos/aprendendo-a-exportar' },
+                { name: 'CECIEx', description: 'Portal do Conselho Brasileiro das Empresas Comerciais Exportadoras e Importadoras.', link: 'http://www.ceciex.com.br/' }
+            ];
+
+            const resourcesGrid = document.getElementById('resources-grid');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesGrid.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

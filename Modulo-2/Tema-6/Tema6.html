@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Negociação Internacional e Cultura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the process of international negotiation and relationship-building into three key areas: 1) Noções Gerais e Culturais (General Concepts and Cultural Dimensions), 2) Fatores de Sucesso (Critical Success Factors), and 3) Recursos (Useful Resources). This flow progresses from a foundational understanding of cultural differences to practical negotiation tips and external tools, making the content easily digestible. Interactive elements include an accordion for cultural dimensions and a table for regional negotiation styles. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts of cultural differences. Goal: Inform. Method: Text blocks. Justification: Clearly presents foundational information.
+        - Report Info: Hofstede's cultural dimensions. Goal: Inform/Organize. Method: Accordion (HTML/JS) for each dimension. Justification: Organizes dense information into a clickable format that reduces clutter.
+        - Report Info: Critical success factors for exporters. Goal: Advise. Method: Bulleted list. Justification: Provides clear, actionable advice.
+        - Report Info: Regional negotiation styles. Goal: Compare/Inform. Method: A table with regional characteristics. Justification: A table is the most effective way to present comparative data clearly.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. No charts are used as the data is primarily textual and structural.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Negociação Internacional e Cultura</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual prático sobre como negociar e se relacionar com clientes em diferentes culturas.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Culturais</button>
+            <button data-tab="success" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Fatores Críticos de Sucesso</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">A Cultura como Fator Chave no Comércio</h2>
+                    <p class="mb-4 text-stone-600">Conhecer a cultura do mercado-alvo, seu ambiente de negócios e seus hábitos é fundamental para o sucesso de relações comerciais internacionais. O maior desafio é a capacidade de adaptação aos padrões culturais do importador, evitando o "critério de autorreferência".</p>
+                    
+                    <div class="space-y-6">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Dimensões Culturais de Hofstede</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">A ferramenta de Hofstede compara países com base em 6 dimensões culturais. Entender essas dimensões pode ajudar na avaliação do mercado-alvo.</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>**Distância ao poder:** Grau de aceitação de uma distribuição desigual de poder.</li>
+                                    <li>**Individualismo vs. Coletivismo:** Preferência por uma estrutura social solta (individualismo) ou por grupos coesos (coletivismo).</li>
+                                    <li>**Masculinidade vs. Feminilidade:** Sociedades com valorização da assertividade e competitividade (masculinas) ou com foco na cooperação e qualidade de vida (femininas).</li>
+                                    <li>**Aversão à incerteza:** Grau em que as pessoas se sentem desconfortáveis com a incerteza e ambiguidade.</li>
+                                    <li>**Orientação de longo prazo:** Foco no futuro e planejamento (longo prazo) ou em tradições e normas sociais (curto prazo).</li>
+                                    <li>**Indulgência vs. Retenção:** Extensão em que as pessoas tentem controlar seus desejos e impulsos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Características por Região</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Embora não se possa generalizar, algumas características de negociação são marcantes em diferentes regiões. A tabela abaixo resume alguns desses traços:</p>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left border-collapse mt-2 text-sm">
+                                        <thead>
+                                            <tr class="bg-stone-100">
+                                                <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Região</th>
+                                                <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Exigências Iniciais</th>
+                                                <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Formalidade</th>
+                                                <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Tratamento de Divergências</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b border-stone-200">
+                                                <td class="p-2">Europa Ocidental</td>
+                                                <td class="p-2">Moderadas</td>
+                                                <td class="p-2">Formal</td>
+                                                <td class="p-2">Cortês e direto</td>
+                                            </tr>
+                                            <tr class="border-b border-stone-200">
+                                                <td class="p-2">Europa Oriental</td>
+                                                <td class="p-2">Elevadas</td>
+                                                <td class="p-2">Formal</td>
+                                                <td class="p-2">Argumentativo</td>
+                                            </tr>
+                                            <tr class="border-b border-stone-200">
+                                                <td class="p-2">América Latina</td>
+                                                <td class="p-2">Moderadas</td>
+                                                <td class="p-2">Informal</td>
+                                                <td class="p-2">Argumentativo</td>
+                                            </tr>
+                                            <tr class="border-b border-stone-200">
+                                                <td class="p-2">América do Norte</td>
+                                                <td class="p-2">Elevadas</td>
+                                                <td class="p-2">Formal</td>
+                                                <td class="p-2">Franco</td>
+                                            </tr>
+                                            <tr class="border-b border-stone-200">
+                                                <td class="p-2">Oriente Médio e África do Norte</td>
+                                                <td class="p-2">Muitas</td>
+                                                <td class="p-2">Informal</td>
+                                                <td class="p-2">Bastante verbalizado</td>
+                                            </tr>
+                                            <tr class="border-b border-stone-200">
+                                                <td class="p-2">Ásia e Pacífico</td>
+                                                <td class="p-2">Moderadas a altas</td>
+                                                <td class="p-2">Muito formal</td>
+                                                <td class="p-2">Cortês e com silêncio</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="success" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Fatores Críticos para Negociações de Sucesso</h2>
+                    <p class="mb-4 text-stone-600">Para garantir o êxito nas negociações internacionais, a empresa exportadora deve estar atenta a uma série de fatores que vão além do produto em si. Esta seção lista os pontos cruciais a serem considerados, desde a preparação até a execução das negociações.</p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li>Conhecimento profundo do cliente estrangeiro e do seu mercado.</li>
+                        <li>Clareza, transparência, profissionalismo e credibilidade no relacionamento.</li>
+                        <li>Cumprimento rigoroso de prazos e acordos.</li>
+                        <li>Transmissão de segurança, confiança e empatia.</li>
+                        <li>Adequação aos padrões culturais do importador.</li>
+                        <li>Manter uma rede de apoio sólida (logística, aduaneira, jurídica).</li>
+                        <li>Documentar todas as informações pertinentes à negociação.</li>
+                        <li>Tomar cuidado nos primeiros contatos, usando papel timbrado e uma comunicação breve, clara e no idioma do cliente (se possível).</li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-semibold text-blue-600 mt-6 mb-2">Sugestões para um Bom Relacionamento:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li>Aprender o idioma local (cumprimentos, elogios).</li>
+                        <li>Neutralizar o etnocentrismo e ser flexível.</li>
+                        <li>Evitar estereótipos culturais.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis e Links</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre negociação e cultura de negócios, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Global Negotiator', description: 'Guias de cultura de negócios e etiqueta em 70 países.', link: 'https://www.globalnegotiator.com/en/business-culture-and-business-etiquette' },
+                { name: 'The Hofstede Centre', description: 'Pesquisa e ferramenta de comparação de dimensões culturais entre países.', link: 'https://geerthofstede.com/' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'https://www.gov.br/empresas-e-negocios/pt-br/invest-export-brasil/arquivos-e-imagens/PUBExportPassoPasso2012.pdf' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

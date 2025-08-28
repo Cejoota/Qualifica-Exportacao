@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de Acordos Comerciais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. The structure is designed to guide the user through the world of trade agreements: 1) Noções Básicas (Fundamental Concepts), 2) Acordos Multilaterais (Multilateral Agreements), 3) Acordos Regionais (Regional Agreements), and 4) Recursos Úteis (Useful Resources). This flow progresses from general to specific information, with interactive accordions to manage content density. This chosen structure breaks down a complex topic into manageable, logical parts, facilitating comprehension. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Basic concepts of trade agreements. Goal: Inform. Method: Text blocks and bullet points. Justification: Clear and concise.
+        - Report Info: Multilateral and regional agreements. Goal: Inform/Organize. Method: Accordions (HTML/JS) for each agreement type and for specific examples (like MERCOSUL-UE, ALADI), revealing details on click. Justification: Organizes dense information effectively and allows users to explore only what is relevant to them.
+        - Report Info: Rules of origin and certificates. Goal: Inform/Explain. Method: Text blocks with clear headings. Justification: Presents a critical and detailed topic clearly.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Acordos Comerciais e Seus Benefícios</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Explore as noções básicas, os tipos de acordos e os benefícios para a sua empresa.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Básicas</button>
+            <button data-tab="multilateral" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Acordos Multilaterais</button>
+            <button data-tab="regional" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Acordos Regionais</button>
+            <button data-tab="rules" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Regras de Origem</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Básicas sobre Acordos Comerciais</h2>
+                    <p class="mb-4 text-stone-600">Esta seção oferece uma introdução aos acordos comerciais, explicando seu propósito e os mecanismos mais comuns. Acordos são ferramentas estratégicas que dinamizam as relações comerciais e sociais, gerando cooperação e desenvolvimento entre os países signatários. Eles vão além das tarifas, buscando também a harmonização de normas e a redução de obstáculos não-tarifários.</p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li>**Acordos Comerciais:** São firmados entre dois ou mais países com o intuito de dinamizar as relações comerciais e sociais entre eles.</li>
+                        <li>**Mecanismos Comuns:** Incluem preferências tarifárias (reduções ou isenção de impostos), uniões econômicas, e a desburocratização das trocas comerciais.</li>
+                        <li>**Benefícios:** Acordos evitam a dupla tributação, promovem a integração e melhoram o acesso aos mercados.</li>
+                        <li>**Tipos:** Podem ser multilaterais (envolvendo vários países), regionais (entre países de uma mesma região) ou bilaterais (entre dois países).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="multilateral" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Acordos e Sistemas Multilaterais</h2>
+                    <p class="mb-6 text-stone-600">Conheça os principais acordos e sistemas multilaterais que moldam o comércio internacional. Estes mecanismos oferecem um quadro regulatório global ou vantagens específicas para países em desenvolvimento, sendo fundamentais para a participação no comércio mundial.</p>
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Organização Mundial do Comércio (OMC)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Criada em 1995, em substituição ao GATT.</li>
+                                    <li>Objetivo: regulamentar as relações comerciais e atuar como fórum de negociações.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Sistema Geral de Preferências (SGP)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Criado em 1970, permite a países desenvolvidos conceder isenção ou redução de impostos de importação para produtos de países em desenvolvimento.</li>
+                                    <li>Exige a emissão do "Certificado de Origem Form A".</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="regional" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Acordos Regionais de Destaque</h2>
+                    <p class="mb-6 text-stone-600">Os acordos regionais são cruciais para a integração econômica e a facilitação do comércio entre países vizinhos ou com afinidades geográficas. Esta seção detalha o MERCOSUL e a ALADI, bem como outros acordos importantes dentro do MERCOSUL.</p>
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>MERCOSUL</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Criado em 1991, visa a eliminação de tarifas aduaneiras e restrições não tarifárias.</li>
+                                    <li>Adotou a Tarifa Externa Comum (TEC), baseada na Nomenclatura Comum do MERCOSUL (NCM).</li>
+                                    <li>Países membros fundadores: Brasil, Argentina, Paraguai e Uruguai.</li>
+                                </ul>
+                                <h4 class="font-semibold mt-4">Outros Acordos no Âmbito do MERCOSUL:</h4>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li>**MERCOSUL-UE:** Acordo de Associação concluído em 2019, prevê a liberalização progressiva do comércio.</li>
+                                    <li>**MERCOSUL-Egito:** Acordo de Livre Comércio vigente desde 2017.</li>
+                                    <li>**MERCOSUL-Israel:** Acordo de Livre Comércio vigente desde 2010.</li>
+                                    <li>**MERCOSUL-Índia:** Acordo de Comércio Preferencial vigente desde 2009.</li>
+                                    <li>**MERCOSUL-SACU:** Acordo de Comércio Preferencial vigente desde 2016.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Associação Latino-Americana de Integração (ALADI)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Instituída em 1980, promove a expansão e a integração na América Latina.</li>
+                                    <li>Objetivo final: o estabelecimento de um mercado comum.</li>
+                                    <li>Países-membros: 13 nações da América Latina.</li>
+                                    <li>Mecanismo: Preferência Tarifária Regional (PTR).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rules" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Regras de Origem e Certificados</h2>
+                    <p class="mb-4 text-stone-600">As regras de origem são fundamentais para a aplicação de acordos comerciais. Elas definem a origem de um produto, garantindo a concessão de benefícios como preferências tarifárias. Esta seção explica o que são essas regras e como a emissão de certificados de origem é crucial para a exportação.</p>
+                    <div class="space-y-4 text-stone-700">
+                        <h3 class="text-xl font-semibold text-blue-600">O que são Regras de Origem?</h3>
+                        <p>São critérios para determinar a origem de um produto, exigindo transformação industrial relevante ou agregação de valor no país de origem. A correta aplicação é essencial para a concessão de quotas e preferências tarifárias.</p>
+                        <h3 class="text-xl font-semibold text-blue-600">Tipos de Regras de Origem:</h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>**Não preferenciais:** aplicáveis a todos os países.</li>
+                            <li>**Preferenciais:** aplicáveis apenas em acordos comerciais.</li>
+                        </ul>
+                        <h3 class="text-xl font-semibold text-blue-600">Certificados de Origem:</h3>
+                        <p>Documentos que certificam a origem dos produtos exportados, com base em suas características e processo de produção. São necessários para usufruir dos benefícios dos acordos comerciais e representam benefícios fiscais para o importador.</p>
+                        <p>Sua emissão é realizada por entidades autorizadas e, para o "Certificado de Origem Form A" do SGP, é de exclusividade de uma instituição bancária credenciada.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis e Links</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento e acessar informações detalhadas, aqui está uma lista de links e recursos oficiais sobre acordos comerciais, regras de origem e certificações. Utilize-os para complementar sua estratégia de exportação.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Portal sobre Acordos de Bens', description: 'Portal com a lista atualizada dos acordos de bens vigentes.', link: 'https://www.gov.br/empresas-e-negocios/pt-br/invest-export-brasil/exportar/conheca-os-mercados/acordos-comerciais/acordos-de-bens' },
+                { name: 'Portal de Negociações Internacionais', description: 'Links para negociações e acordos internacionais.', link: 'https://www.gov.br/mdic/pt-br/assuntos/comercio-exterior/negociacoes-internacionais-'},
+                { name: 'CAMEX: Tarifa Externa Comum', description: 'Informações sobre a Tarifa Externa Comum (TEC) do MERCOSUL.', link: 'http://www.camex.gov.br/tarifa-externa-comum-tec' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'https://www.gov.br/siscomex/pt-br/servicos/aprendendo-a-exportar' },
+                { name: 'Certificados de Origem', description: 'Informações gerais sobre certificados de origem.', link: 'https://www.gov.br/mdic/pt-br/assuntos/comercio-exterior/regimes-de-origem/certificado-de-origem' },
+                { name: 'Certificado de Origem Digital - COD', description: 'Detalhes sobre a emissão e uso do Certificado de Origem Digital.', link: 'https://www.gov.br/mdic/pt-br/assuntos/comercio-exterior/regimes-de-origem/certificado-de-origem-digital-cod-1' },
+                { name: 'Certificado de Origem "Form A"', description: 'Informações específicas sobre o certificado Form A para o SGP.', link: 'https://www.gov.br/mdic/pt-br/assuntos/comercio-exterior/regimes-de-origem/certificado-de-origem/cdo-certificado-form' },
+                { name: 'ABC das Regras de Origem', description: 'Um guia básico sobre as regras de origem.', link: 'https://www.gov.br/mdic/pt-br/images/REPOSITORIO/secex/deint/coreo/regras_de_origem' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    
+                    const isExpanded = button.classList.toggle('active');
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

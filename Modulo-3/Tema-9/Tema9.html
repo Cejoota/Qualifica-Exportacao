@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Distribuição Internacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the process of international distribution into four key areas: 1) Noções Gerais e Competitividade (Basic concepts and competitive aspects), 2) Tipos de Distribuição (Types of distribution strategies), 3) Intermediários (Details on various intermediaries), and 4) Canais Diretos e Digitais (Direct and digital channels) with a section for useful resources. This flow guides the user from foundational knowledge to specific channel options, making the content easily digestible and actionable. Interactive elements include accordions to detail each type of intermediary. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Basic concepts of international distribution. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Types of distribution (intensive, selective, exclusive). Goal: Inform/Organize. Method: A detailed list of each type. Justification: Clearly presents different strategies.
+        - Report Info: Various intermediaries (agents, distributors, wholesalers, etc.). Goal: Inform/Organize. Method: Accordions (HTML/JS) for each type. Justification: Organizes detailed information about each intermediary into a clean, easy-to-read format.
+        - Report Info: Direct and digital channels. Goal: Inform/Advise. Method: Bulleted lists. Justification: Provides clear information on modern distribution methods.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Distribuição Internacional</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Explore os canais de distribuição e as estratégias para levar seu produto ao consumidor final no exterior.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Competitividade</button>
+            <button data-tab="types" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Tipos de Distribuição</button>
+            <button data-tab="intermediaries" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Intermediários</button>
+            <button data-tab="direct_channels" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Canais Diretos e Digitais</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Canais de Distribuição e Competitividade</h2>
+                    <p class="mb-4 text-stone-600">A distribuição internacional é o caminho que seu produto percorre da fábrica até o consumidor final. As decisões de distribuição impactam diretamente a competitividade da sua empresa, pois afetam o custo logístico, o tempo de entrega e a percepção de valor do produto.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Fatores para Avaliar a Competitividade:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Agilidade na entrega:** Tempo entre a compra e o recebimento do produto.</li>
+                                <li>**Garantias:** Assegurar o abastecimento e a existência de infraestrutura de distribuição.</li>
+                                <li>**Custo logístico:** Controlar os custos de transporte e frete internacional.</li>
+                                <li>**Rede de apoio:** Contar com profissionais de comércio exterior e uma rede de transportes eficiente.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Fatores para a Decisão sobre o Canal de Distribuição:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>Tipo e características do produto (valor, periculosidade, etc.).</li>
+                                <li>Forma de comercialização (direta ou indireta).</li>
+                                <li>Custo dos serviços de distribuição e características ambientais do mercado.</li>
+                                <li>Comportamento e peculiaridades dos consumidores.</li>
+                                <li>Estratégias de distribuição dos concorrentes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="types" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Tipos de Distribuição</h2>
+                    <p class="mb-4 text-stone-600">A escolha do tipo de distribuição é uma decisão estratégica que depende do seu produto e do mercado. Esta seção explora as três principais modalidades, desde a presença massiva em pontos de venda até a exclusividade de um único intermediário.</p>
+                    
+                    <div class="space-y-4 text-stone-700">
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>**Distribuição Intensiva:** Utiliza muitos intermediários para que os produtos sejam encontrados em diversos pontos de venda. Exemplo: balas e confeitos.</li>
+                            <li>**Distribuição Seletiva:** Utiliza poucos e específicos intermediários para que os produtos sejam encontrados em pontos de venda bem determinados. Exemplo: automóveis.</li>
+                            <li>**Distribuição Exclusiva:** Caracterizada pela utilização de um único intermediário ou nenhum intermediário, geralmente para artigos de luxo ou produtos muito especializados.</li>
+                        </ul>
+                        <p class="mt-4">Independentemente do tipo, a logística de distribuição deve ser continuamente avaliada em relação ao tempo de resposta, compatibilidade do modal de transporte e manutenção do estoque.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="intermediaries" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Conhecendo os Intermediários</h2>
+                    <p class="mb-4 text-stone-600">Muitas operações de comércio internacional são intermediadas por profissionais que facilitam a entrada de produtos em novos mercados. Conhecer as funções e as características de cada tipo de intermediário é fundamental para a escolha do parceiro ideal. Clique para ver os detalhes:</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Agentes Comerciais</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Pessoa física ou jurídica que atua como intermediário em vendas internacionais por comissão. Suas funções incluem promover produtos, identificar oportunidades e prestar assessoria.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Representantes no exterior</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Funcionários da empresa, habilitados para fechar negócios e acordos comerciais. Precisam conhecer bem as políticas da empresa, os produtos e a disponibilidade de estoque.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Distribuidores</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Compram o produto para revenda, assumindo o risco. Possuem exclusividade em uma área geográfica delimitada e devem seguir a política de preços do exportador.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Atacadistas/Revendedores</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Compram e revendem mercadorias para varejistas em grande volume, sem vínculo de exclusividade. Podem ser um canal estratégico para ganhar capilaridade no mercado.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Trading Companies / ECEs</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Empresas especializadas em operações de exportação, ideais para micro e pequenas empresas que estão iniciando no mercado internacional, pois já possuem canais de distribuição e relacionamento com clientes no exterior.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="direct_channels" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Canais Diretos, Digitais e Recursos</h2>
+                    <p class="mb-4 text-stone-600">A distribuição direta e o uso de canais digitais são alternativas modernas e eficientes. Esta seção explora essas modalidades e oferece recursos adicionais para aprofundar seu conhecimento em estratégias de distribuição internacional.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Canais Diretos e Digitais:</h3>
+                            <p class="mb-2 text-stone-700">A distribuição direta pode ser feita por meio de uma subsidiária ou lojas próprias no exterior, mas exige maior investimento. Os canais digitais são uma forma de distribuição direta para produtos como e-books e filmes, incluindo websites (e-commerce), marketplaces e redes sociais.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Recursos Úteis:</h3>
+                            <div id="resources-list" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

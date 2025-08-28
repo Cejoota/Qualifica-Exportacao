@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Operações de Câmbio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais e Taxas (General concepts of the exchange market and rates), 2) Contrato de Câmbio e Negociação (The exchange contract and negotiation process), 3) Mecanismos e Modalidades (Mechanisms for receiving funds and payment methods), and 4) Recursos Úteis (Useful resources). This flow guides the user from foundational knowledge to practical steps for managing exchange operations. Interactive elements include accordions to detail each topic. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts of the Brazilian exchange market. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Exchange rates (buy vs. sell) and spread. Goal: Explain. Method: Text blocks. Justification: A clear explanation of a key concept.
+        - Report Info: Exchange contract stages and negotiation points. Goal: Inform/Organize. Method: Bulleted lists. Justification: Provides a structured view of the process and key negotiation points.
+        - Report Info: Mechanisms for receiving funds (ACC, ACE, exchange hedge) and transfer modalities (SWIFT). Goal: Explain. Method: Accordions for each mechanism and modality. Justification: Organizes detailed information about complex financial tools into a clean, easy-to-read format.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Operações de Câmbio</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Entenda o funcionamento, as regras e os mecanismos do mercado de câmbio brasileiro para a exportação.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Taxas</button>
+            <button data-tab="contract" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Contrato de Câmbio e Negociação</button>
+            <button data-tab="mechanisms" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Mecanismos e Modalidades</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">O Mercado de Câmbio Brasileiro</h2>
+                    <p class="mb-4 text-stone-600">Para gerir negócios internacionais, é crucial entender o mercado de câmbio brasileiro. Ele não permite o livre curso de moeda estrangeira, o que significa que todo exportador deve transformar os valores recebidos em moeda estrangeira em reais através de agentes autorizados pelo Banco Central do Brasil (BCB).</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Conceitos de Câmbio:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Câmbio:** A troca da moeda de um país pela de outro.</li>
+                                <li>**Taxa de Câmbio:** A quantidade de moeda doméstica necessária para adquirir uma unidade de moeda estrangeira.</li>
+                                <li>**Taxa de Compra:** O valor que um agente autorizado paga por uma moeda estrangeira.</li>
+                                <li>**Taxa de Venda:** O valor que um agente autorizado cobra para vender uma moeda estrangeira.</li>
+                                <li>**Spread Cambial:** A diferença entre a taxa de venda e a de compra, que é o lucro do agente.</li>
+                            </ul>
+                            <p class="mt-4 text-stone-600">A taxa de câmbio influencia a competitividade das exportações: uma taxa alta (moeda desvalorizada) favorece os exportadores.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contract" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Contrato de Câmbio e Negociação</h2>
+                    <p class="mb-4 text-stone-600">O contrato de câmbio é o instrumento que formaliza a transação de compra/venda de moeda estrangeira. Ele é bilateral, consensual e oneroso. A negociação com um agente de câmbio é uma etapa crucial para garantir as melhores condições.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Etapas do Contrato de Câmbio</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Cotação</li>
+                                    <li>Contratação</li>
+                                    <li>Registro/edição no sistema do BCB</li>
+                                    <li>Efetivação</li>
+                                    <li>Liquidação</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Pontos para Negociação</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Escolha de um bom agente de câmbio.</li>
+                                    <li>Negociação de valores das taxas, especialmente para grandes valores.</li>
+                                    <li>Formalização com o importador da forma de envio dos valores.</li>
+                                    <li>Verificação com o contador sobre obrigações fiscais e contábeis.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Prazos para Recebimento de Divisas</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>**Recebimento Antecipado:** Antes do embarque da mercadoria.</li>
+                                    <li>**Recebimento à Vista:** Após o embarque da mercadoria.</li>
+                                    <li>**Recebimento a Prazo:** O pagamento ocorre após o embarque, conforme o prazo acordado.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mechanisms" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Mecanismos para Antecipação e Transferência de Valores</h2>
+                    <p class="mb-4 text-stone-600">O exportador pode utilizar mecanismos financeiros para antecipar o recebimento dos valores e se proteger de flutuações cambiais. Além disso, as transferências de dinheiro entre países são realizadas por meio de modalidades específicas, com destaque para a Ordem de Pagamento via SWIFT.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>ACC e ACE</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>**ACC (Adiantamento sobre Contratos de Câmbio):** Financiamento com garantia de uma exportação futura, para obtenção de capital de giro antes do embarque.</li>
+                                    <li>**ACE (Adiantamento sobre Cambiais de Exportação):** Mecanismo semelhante ao ACC, mas contratado na fase de comercialização (pós-embarque).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Trava Cambial</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Fechamento de um contrato de câmbio sem o recebimento antecipado do valor em moeda nacional. É um mecanismo de proteção contra flutuações do dólar.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Modalidades de Transferência</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">As transferências de dinheiro entre países podem ser feitas por cheques, cartões de crédito/débito internacionais e, principalmente, por ordens de pagamento via SWIFT, um sistema seguro de troca de dados entre bancos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre o mercado e as operações de câmbio, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Conversor de Moedas (BCB)', description: 'Ferramenta oficial do Banco Central do Brasil para conversão de moedas.', link: 'https://www.bcb.gov.br/conversao' },
+                { name: 'Cartilha de Câmbio (BCB)', description: 'Cartilha oficial sobre as regras de câmbio para pequenos valores.', link: 'https://www.bcb.gov.br/rex/cartilha/cartilha_cambio_envio_recebimento_pequeno_valores.pdf' },
+                { name: 'Instituições habilitadas a operar no mercado de câmbio (BCB)', description: 'Lista de instituições financeiras autorizadas a operar câmbio no Brasil.', link: 'https://www.bcb.gov.br/acessoinformacao/legado?url=https:%2F%2Fwww.bcb.gov.br%2Frex%2FIAMC%2FPort%2FInstituicoes%2Finst_autorizadas.asp' },
+                { name: 'Estatísticas sobre câmbio (BCB)', description: 'Dados e estatísticas oficiais sobre o mercado de câmbio.', link: 'https://www.bcb.gov.br/estatisticas/estatisticascambio' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

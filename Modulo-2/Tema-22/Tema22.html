@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Eventos de Promoção Comercial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Importância e Eventos (Importance and types of events), 2) Feiras de Negócios (Trade Fairs with a preparation checklist), 3) Outras Modalidades (Other types of events like business rounds and missions), and 4) Recursos Úteis (Useful resources). This flow guides the user from general concepts to specific event types and practical preparation tools, making the content easily digestible and actionable. Interactive elements include accordions and a clickable checklist. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Types of commercial promotion events. Goal: Inform/Organize. Method: Accordions for each type of event (trade fairs, missions, etc.). Justification: Organizes different event types clearly.
+        - Report Info: Trade fair profile analysis. Goal: Inform/Advise. Method: Bulleted lists. Justification: Provides clear criteria for evaluating a fair.
+        - Report Info: Checklist for participation. Goal: Organize/Track. Method: An interactive checklist (HTML/JS) to help users prepare for events. Justification: Provides a practical, actionable tool for users to assess their readiness.
+        - Report Info: Approval factors. Goal: Inform/Advise. Method: Bulleted lists. Justification: Provides key information for increasing the chances of approval.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .checklist-item {
+            padding-left: 2rem;
+            position: relative;
+        }
+        .checklist-item input {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Eventos de Promoção Comercial</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Tudo o que você precisa saber para participar de feiras, missões e rodadas de negócios internacionais.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="overview" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Importância e Eventos</button>
+            <button data-tab="fairs" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Feiras de Negócios</button>
+            <button data-tab="other_events" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Outras Modalidades</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Importância da Participação em Eventos</h2>
+                    <p class="mb-4 text-stone-600">A participação em eventos de promoção comercial é uma excelente forma de prospectar mercados e encontrar clientes internacionais. Eles oferecem oportunidades únicas de divulgação, networking, benchmarking e acompanhamento de tendências do setor, complementando outras estratégias de prospecção.</p>
+                    <div class="space-y-4 text-stone-700">
+                        <h3 class="text-xl font-semibold text-blue-600">Eventos como Nova Forma de Prospecção:</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>**Feiras de negócios:** Apresentação e divulgação de produtos.</li>
+                            <li>**Rodadas de negócios:** Encontros focados em negociações diretas.</li>
+                            <li>**Missões empresariais:** Viagens para conhecer mercados in loco.</li>
+                            <li>**Projetos comprador/vendedor:** Eventos que reúnem compradores e vendedores em um local.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="fairs" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Feiras de Negócios</h2>
+                    <p class="mb-4 text-stone-600">As feiras são eventos para apresentação, divulgação e negociação de produtos, além de serem um "microcosmos" do setor, com grande concentração de clientes e concorrentes. Antes de participar como expositor, é aconselhável visitar a feira para avaliar seu perfil e a viabilidade do investimento.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Fatores para Análise do Perfil de uma Feira:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>Tipo e porte das empresas participantes.</li>
+                                <li>Natureza da feira (setorial ou multisetorial).</li>
+                                <li>Tipo e porte do público visitante.</li>
+                                <li>Representatividade e importância da feira no setor.</li>
+                                <li>Custo de participação e apoio oferecido ao expositor.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Checklist para Participação:</h3>
+                            <p class="mb-2 text-stone-600">Utilize este checklist para garantir que sua empresa está preparada para o evento:</p>
+                            <div class="accordion-item">
+                                <button class="accordion-button">
+                                    <span>Preparação Essencial para Eventos</span>
+                                    <span class="arrow">&#9662;</span>
+                                </button>
+                                <div class="accordion-content">
+                                    <ul class="space-y-2 text-stone-700">
+                                        <li class="checklist-item"><input type="checkbox" class="mr-2"> Conhecimento sobre o mercado-alvo.</li>
+                                        <li class="checklist-item"><input type="checkbox" class="mr-2"> Website próprio e material promocional em outros idiomas.</li>
+                                        <li class="checklist-item"><input type="checkbox" class="mr-2"> Catálogo técnico, cartão de visitas e amostras (se aplicável).</li>
+                                        <li class="checklist-item"><input type="checkbox" class="mr-2"> Preço formado para o mercado externo (EXW, FOB, CIF).</li>
+                                        <li class="checklist-item"><input type="checkbox" class="mr-2"> Conhecimento sobre INCOTERMS e modalidades de pagamento.</li>
+                                        <li class="checklist-item"><input type="checkbox" class="mr-2"> Análise sobre exigências técnicas e barreiras comerciais.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="other_events" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Outras Modalidades de Eventos</h2>
+                    <p class="mb-4 text-stone-600">Além das feiras, existem outras modalidades de eventos de promoção comercial que podem ser estratégicas para a sua empresa. Clique em cada item para saber mais sobre as características de rodadas de negócios, missões empresariais e projetos comprador/vendedor.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Rodadas de Negócios</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Eventos de curta duração com horários pré-determinados para reuniões de negócio entre vendedores e compradores internacionais. Podem ocorrer no país ou no exterior, muitas vezes associadas a feiras.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Missões Empresariais</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Viagens de empresários a países com oportunidades de negócios para conhecer os mercados "in loco" e fazer contato direto com clientes e parceiros locais. O principal benefício é o acesso a contatos qualificados.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Projeto Comprador/Vendedor</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">No "projeto comprador", compradores estrangeiros são convidados a vir ao país para se reunir com empresários. No "projeto vendedor", empresários vão ao exterior para se reunir com compradores. Ambos são eventos focados em encontros de negócios.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis e Links</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre eventos de promoção comercial e encontrar oportunidades, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Guia "Aprendendo a exportar"', description: 'Informações sobre exposições e feiras.', link: 'http://www.aprendendoaexportar.gov.br/index.php/promovendo-os-produtos/exposicoes-e-feiras' },
+                { name: 'Consulta à lista de Feiras no exterior', description: 'Consulte eventos em diversos países.', link: 'https://investexportbrasil.dpr.gov.br/FeirasExterior/Busca/frmBuscaFeiraExterior.aspx' },
+                { name: 'Departamento de Promoção Comercial (Itamaraty)', description: 'Informações do Ministério das Relações Exteriores sobre promoção comercial.', link: 'http://www.investexportbrasil.gov.br/dpr-1' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

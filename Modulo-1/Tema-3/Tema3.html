@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta Interativa de Seleção de Mercados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the complex process of market selection into manageable, task-oriented sections: 1) Overview, 2) Analysis Factors, 3) Comparison Tool, 4) Trade Barriers, and 5) Resources. This non-linear navigation allows users to easily switch between learning concepts and applying them in the comparison tool, enhancing usability and engagement compared to a linear document. Key interactions include clickable cards for factor details and a dynamic radar chart for country comparison. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Main analysis factors. Goal: Inform/Organize. Method: Interactive cards (HTML/JS) to reveal details on click, reducing cognitive load. Justification: More engaging than static text.
+        - Report Info: Country comparison matrix. Goal: Compare/Analyze. Method: Interactive HTML table linked to a dynamic Radar Chart (Chart.js). Interaction: User adds countries and scores them, chart updates instantly. Justification: Transforms a theoretical matrix into a practical, visual analysis tool.
+        - Report Info: Trade barriers. Goal: Inform. Method: Accordion (HTML/JS). Justification: Neatly organizes dense information.
+        - Report Info: External links. Goal: Inform. Method: Styled list. Justification: Clear and functional.
+        - Library/Method: Chart.js for the radar chart, Vanilla JS for all interactions.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia Interativo de Seleção de Mercados</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Uma ferramenta para analisar e comparar mercados potenciais para expansão internacional.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="overview" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Visão Geral</button>
+            <button data-tab="factors" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Fatores de Análise</button>
+            <button data-tab="comparator" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Ferramenta de Comparação</button>
+            <button data-tab="barriers" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Barreiras Comerciais</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos</button>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Aspectos Gerais da Seleção de Mercados</h2>
+                    <p class="mb-4 text-stone-600">Esta seção introdutória estabelece a base para a seleção de mercados. A avaliação de mercados potenciais é um processo estratégico que envolve a análise de variáveis quantitativas e qualitativas. A decisão final é complexa e deve estar alinhada aos objetivos de expansão da sua empresa. Aqui, você entenderá a importância de olhar além da competitividade do produto e considerar as condições que o país de destino oferece.</p>
+                    <div class="space-y-4 text-stone-700">
+                        <p><strong>Decisão Complexa:</strong> A tomada de decisão para escolher um mercado é multifacetada, envolvendo um conjunto de critérios estabelecidos pela empresa. Não existe uma hierarquia padrão ou única para esses critérios.</p>
+                        <p><strong>Critérios de Análise:</strong> São as características e variáveis que devem ser levantadas, estudadas e analisadas. Esta análise pode ser feita internamente ou por meio de pesquisas de mercado contratadas, sempre considerando os objetivos da empresa com a inserção internacional.</p>
+                        <p><strong>Competitividade Ampla:</strong> Muitos empresários focam a competitividade apenas no produto, na empresa ou no setor. No entanto, é crucial considerar a competitividade do país-alvo como um todo.</p>
+                        <p><strong>O Mercado-Alvo Ideal:</strong> Um bom mercado-alvo deve prover as condições necessárias para que empresas e empreendedores possam exercer suas atividades de forma a superar seus concorrentes, garantindo um ambiente de negócios favorável.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="factors" class="content-section">
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Fatores de Análise para Seleção de Mercados</h2>
+                     <p class="mb-6 text-stone-600">Explore os principais fatores que devem ser considerados ao avaliar um novo mercado. A análise é dividida em dois grandes grupos: Político-Econômicos e Socioculturais. Clique em cada fator para ver uma descrição detalhada e exemplos de critérios práticos que podem ser aplicados na sua pesquisa. Esta abordagem estruturada ajuda a garantir que nenhuma área crítica seja negligenciada.</p>
+                    <div id="factors-container" class="space-y-4"></div>
+                </div>
+            </section>
+
+            <section id="comparator" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Ferramenta de Comparação de Mercados</h2>
+                    <p class="mb-6 text-stone-600">Utilize esta ferramenta para aplicar os conceitos aprendidos. Adicione os países que deseja comparar e atribua uma nota de 1 (Muito Fraco) a 5 (Muito Forte) para cada fator de análise. A tabela permite uma comparação direta, enquanto o gráfico de radar abaixo oferece uma visualização poderosa do perfil de atratividade de cada mercado, ajudando a identificar os mais promissores de forma rápida e intuitiva.</p>
+                    <div class="mb-6">
+                        <input type="text" id="country-name-input" placeholder="Nome do País" class="border border-stone-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <button id="add-country-btn" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300 ml-2">Adicionar País</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table id="comparison-table" class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-stone-100">
+                                    <th class="p-3 font-semibold text-stone-700 border-b-2 border-stone-200">Fator de Análise</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold text-blue-700 mb-4 text-center">Visualização Comparativa</h3>
+                        <div class="chart-container">
+                            <canvas id="comparison-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="barriers" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Entendendo as Barreiras Comerciais</h2>
+                    <p class="mb-6 text-stone-600">As barreiras comerciais são um dos critérios mais críticos, pois podem impactar diretamente a viabilidade de uma operação de exportação. Elas são leis, regulamentos ou práticas governamentais que restringem o comércio internacional. Nesta seção, detalhamos os três principais tipos de barreiras para que você possa identificá-las e se preparar para elas. Clique em cada categoria para expandir e ver os detalhes.</p>
+                    <div id="barriers-container" class="space-y-3"></div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Fontes de Consulta e Plataformas Úteis</h2>
+                     <p class="mb-6 text-stone-600">A pesquisa de mercado é um processo contínuo e que exige dados confiáveis. Esta seção compila uma lista de plataformas e fontes de consulta valiosas para aprofundar sua análise. Aqui você encontrará desde bases de dados estatísticos até ferramentas de visualização e relatórios sobre o ambiente de negócios global. Utilize estes recursos para complementar sua pesquisa e tomar decisões mais embasadas.</p>
+                    <div id="resources-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+
+            const factorsData = [
+                {
+                    category: 'FATORES POLÍTICO-ECONÔMICOS',
+                    items: [
+                        { name: 'Econômico', description: 'Inclui indicadores como Produto Interno Bruto (PIB), taxa de crescimento do PIB, renda per capita, inflação, moeda, câmbio com o dólar, principais produtos exportados e importados, e os principais países com os quais se comercializa.' },
+                        { name: 'Natural', description: 'Refere-se a fatores que, por questões do meio ambiente e da natureza, podem influenciar as vendas do produto, como duração das estações do ano, temperatura média anual, e distribuição da população no território.' },
+                        { name: 'Político', description: 'Abrange o sistema de governo, índice de corrupção, nível de interferência do governo nos preços, proteção para produtores locais e existência de acordos comerciais.' },
+                        { name: 'Institucional / Legal', description: 'Diz respeito ao ambiente regulatório, incluindo a facilidade de registro de marcas, a necessidade de certificações, e a estrutura legal para negócios internacionais.' }
+                    ]
+                },
+                {
+                    category: 'FATORES SOCIOCULTURAIS',
+                    items: [
+                        { name: 'Demográfico', description: 'Análise da população, incluindo tamanho, crescimento, distribuição etária, urbanização e outras características demográficas relevantes para o consumo do produto.' },
+                        { name: 'Cultural', description: 'Compreende idioma, religião, valores, costumes, estilo de vida e atitudes que podem influenciar a aceitação e o marketing do produto.' },
+                        { name: 'Tecnológico', description: 'Nível de desenvolvimento tecnológico, infraestrutura de TI e comunicação, taxa de adoção de novas tecnologias e o impacto da tecnologia no setor.' }
+                    ]
+                }
+            ];
+
+            const barriersData = [
+                { name: 'Barreiras Tarifárias', description: 'Impostos aplicados sobre produtos importados, como o Imposto de Importação. O objetivo é aumentar o preço do produto estrangeiro para torná-lo menos competitivo em relação aos produtos nacionais. Inclui também as quotas tarifárias, que aplicam tarifas diferentes para quantidades diferentes de um produto importado.' },
+                { name: 'Barreiras Não Tarifárias', description: 'Restrições ao comércio que não envolvem impostos. Incluem: restrições quantitativas (quotas), exigências de licenciamento, regulamentos técnicos complexos (embalagem, rotulagem), medidas sanitárias e fitossanitárias rigorosas, e subsídios a produtores locais que criam uma concorrência desleal.' },
+                { name: 'Outras Barreiras', description: 'Medidas que dificultam o comércio de forma indireta. Incluem: tributação interna discriminatória (impostos mais altos para produtos importados), controle de preços, procedimentos aduaneiros lentos e burocráticos, e a aplicação de medidas de defesa comercial como antidumping e salvaguardas.' }
+            ];
+            
+            const resourcesData = [
+                { name: 'UN Comtrade Database', description: 'Grande repositório de estatísticas de comércio internacional da ONU.', link: 'https://comtrade.un.org/' },
+                { name: 'The Observatory of Economic Complexity (OEC)', description: 'Ferramenta de visualização de dados de comércio internacional.', link: 'https://oec.world/' },
+                { name: 'World Economic Outlook (FMI)', description: 'Dados e projeções macroeconômicas do Fundo Monetário Internacional.', link: 'https://www.imf.org/en/Publications/WEO' },
+                { name: 'The World Factbook (CIA)', description: 'Informações gerais e estatísticas sobre todos os países do mundo.', link: 'https://www.cia.gov/the-world-factbook/' },
+                { name: 'Doing Business (Banco Mundial)', description: 'Relatórios sobre o ambiente de negócios em 190 economias (descontinuado, mas o arquivo é útil).', link: 'https://archive.doingbusiness.org/en/doingbusiness' },
+                { name: 'ITC Standards Map', description: 'Informações sobre padrões voluntários de sustentabilidade e qualidade.', link: 'http://www.standardsmap.org/identify' },
+                { name: 'Global Trade Helpdesk', description: 'Informações integradas sobre comércio para empresas.', link: 'https://globaltradehelpdesk.org/' },
+                { name: 'ITC Market Access Map', description: 'Informações sobre tarifas e condições de acesso a mercados.', link: 'https://www.macmap.org/' }
+            ];
+
+            const factorsContainer = document.getElementById('factors-container');
+            factorsData.forEach(group => {
+                const groupTitle = document.createElement('h3');
+                groupTitle.className = 'text-xl font-bold text-blue-700 mt-6 border-b-2 border-blue-200 pb-2';
+                groupTitle.textContent = group.category;
+                factorsContainer.appendChild(groupTitle);
+
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 mt-4';
+                
+                group.items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'border border-stone-200 rounded-lg p-4 cursor-pointer hover:bg-blue-50 hover:shadow-md transition-all duration-300';
+                    card.innerHTML = `
+                        <div class="font-semibold text-lg text-stone-800">${item.name}</div>
+                        <div class="text-stone-600 mt-2 text-sm hidden">${item.description}</div>
+                    `;
+                    card.addEventListener('click', () => {
+                        card.querySelector('div:last-child').classList.toggle('hidden');
+                    });
+                    grid.appendChild(card);
+                });
+                factorsContainer.appendChild(grid);
+            });
+
+            const barriersContainer = document.getElementById('barriers-container');
+            barriersData.forEach(item => {
+                const element = document.createElement('div');
+                element.className = 'border border-stone-200 rounded-lg';
+                element.innerHTML = `
+                    <button class="w-full text-left p-4 font-semibold text-stone-800 flex justify-between items-center hover:bg-stone-50">
+                        <span>${item.name}</span>
+                        <span class="transform transition-transform duration-300">&#9662;</span>
+                    </button>
+                    <div class="px-4 pb-4 text-stone-600 text-sm hidden">
+                        ${item.description}
+                    </div>
+                `;
+                const button = element.querySelector('button');
+                const content = element.querySelector('div');
+                const arrow = element.querySelector('span:last-child');
+                button.addEventListener('click', () => {
+                    content.classList.toggle('hidden');
+                    arrow.classList.toggle('rotate-180');
+                });
+                barriersContainer.appendChild(element);
+            });
+            
+            const resourcesContainer = document.getElementById('resources-container');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            const comparisonTableBody = document.querySelector('#comparison-table tbody');
+            const comparisonTableHeader = document.querySelector('#comparison-table thead tr');
+            const allFactors = factorsData.flatMap(g => g.items.map(i => i.name));
+            let comparisonData = {};
+            let chart;
+
+            function renderTable() {
+                comparisonTableBody.innerHTML = '';
+                allFactors.forEach(factor => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-stone-200';
+                    row.innerHTML = `<td class="p-3 font-medium text-stone-700">${factor}</td>`;
+                    
+                    Object.keys(comparisonData).forEach(country => {
+                        const cell = document.createElement('td');
+                        cell.className = 'p-3';
+                        const select = document.createElement('select');
+                        select.className = 'w-full p-1 border border-stone-300 rounded-md';
+                        select.dataset.country = country;
+                        select.dataset.factor = factor;
+                        for (let i = 1; i <= 5; i++) {
+                            const option = document.createElement('option');
+                            option.value = i;
+                            option.textContent = i;
+                            if (comparisonData[country][factor] === i) {
+                                option.selected = true;
+                            }
+                            select.appendChild(option);
+                        }
+                        cell.appendChild(select);
+                        row.appendChild(cell);
+                    });
+                    comparisonTableBody.appendChild(row);
+                });
+            }
+
+            function updateChart() {
+                const ctx = document.getElementById('comparison-chart').getContext('2d');
+                const datasets = Object.keys(comparisonData).map((country, index) => {
+                    const colors = [
+                        'rgba(29, 78, 216, 0.7)', 'rgba(217, 70, 239, 0.7)', 'rgba(14, 165, 233, 0.7)',
+                        'rgba(249, 115, 22, 0.7)', 'rgba(22, 163, 74, 0.7)'
+                    ];
+                    const borderColors = [
+                        'rgba(29, 78, 216, 1)', 'rgba(217, 70, 239, 1)', 'rgba(14, 165, 233, 1)',
+                        'rgba(249, 115, 22, 1)', 'rgba(22, 163, 74, 1)'
+                    ];
+                    return {
+                        label: country,
+                        data: allFactors.map(factor => comparisonData[country][factor]),
+                        backgroundColor: colors[index % colors.length].replace('0.7', '0.2'),
+                        borderColor: borderColors[index % borderColors.length],
+                        borderWidth: 2,
+                        pointBackgroundColor: borderColors[index % borderColors.length]
+                    };
+                });
+
+                if (chart) {
+                    chart.destroy();
+                }
+
+                chart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: allFactors,
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                pointLabels: {
+                                    font: {
+                                        size: 12
+                                    },
+                                    color: '#333'
+                                },
+                                ticks: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: 5,
+                                    stepSize: 1,
+                                    backdropColor: 'rgba(255, 255, 255, 0.75)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.r !== null) {
+                                            label += context.parsed.r;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            document.getElementById('add-country-btn').addEventListener('click', () => {
+                const countryNameInput = document.getElementById('country-name-input');
+                const countryName = countryNameInput.value.trim();
+                if (countryName && !comparisonData[countryName]) {
+                    comparisonData[countryName] = {};
+                    allFactors.forEach(factor => {
+                        comparisonData[countryName][factor] = 3; 
+                    });
+
+                    const th = document.createElement('th');
+                    th.className = 'p-3 font-semibold text-stone-700 border-b-2 border-stone-200';
+                    th.textContent = countryName;
+                    comparisonTableHeader.appendChild(th);
+
+                    renderTable();
+                    updateChart();
+                    countryNameInput.value = '';
+                }
+            });
+
+            comparisonTableBody.addEventListener('change', (e) => {
+                if (e.target.tagName === 'SELECT') {
+                    const { country, factor } = e.target.dataset;
+                    comparisonData[country][factor] = parseInt(e.target.value, 10);
+                    updateChart();
+                }
+            });
+
+            renderTable();
+            updateChart();
+        });
+    </script>
+</body>
+</html>

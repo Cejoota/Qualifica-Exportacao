@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Registro Internacional de Marcas e Patentes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Conceitos Básicos (Basic definitions of brands and patents), 2) Aspectos Legais (Legal requirements and processes), 3) Proteção Internacional (International treaties and agreements), and 4) Cuidados e Recursos (Important considerations and useful links). This flow progresses from foundational knowledge to practical application and external resources, making the content easily digestible and actionable. Interactive elements include accordions to present detailed information on each topic. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Definitions of brands and patents. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Types of patents and legal aspects. Goal: Inform/Organize. Method: Accordions (HTML/JS) for each type and legal point. Justification: Organizes dense legal information into a clickable format that reduces clutter.
+        - Report Info: International agreements (Madrid Protocol, CUP, PCT). Goal: Inform/Compare. Method: Accordions for each agreement. Justification: Presents complex treaties in a structured, easy-to-read format.
+        - Report Info: Important tips and links. Goal: Advise/Provide access. Method: Bulleted lists and a styled list of links. Justification: Provides clear, actionable advice and direct access to external resources.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Registro Internacional de Marcas e Patentes</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Tudo o que você precisa saber para proteger sua propriedade industrial no exterior.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Conceitos Básicos</button>
+            <button data-tab="legal" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Aspectos Legais</button>
+            <button data-tab="international" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Proteção Internacional</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Cuidados e Recursos</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Marcas e Patentes: O que são?</h2>
+                    <p class="mb-4 text-stone-600">Esta seção introduz os conceitos de marca e patente, que são pilares da propriedade industrial. Entender a diferença e a importância de cada um é o primeiro passo para proteger os ativos intangíveis da sua empresa e garantir um diferencial competitivo no mercado internacional.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Marcas:</h3>
+                            <p class="mb-2 text-stone-700">Marcas são sinais visualmente perceptíveis e distintivos que servem para identificar e diferenciar um produto ou serviço dos concorrentes. São ativos intangíveis que representam valor, reputação e confiabilidade. Podem ser licenciadas, gerando receita para a empresa.</p>
+                            <ul class="list-disc list-inside space-y-1 text-stone-700">
+                                <li>Podem ser figuras, textos, palavras, letras, logomarcas, rótulos, etc.</li>
+                                <li>A marca registrada garante propriedade e uso exclusivo no território nacional por 10 anos, prorrogáveis.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Patentes:</h3>
+                            <p class="mb-2 text-stone-700">Patentes são títulos de propriedade temporária sobre uma invenção ou modelo de utilidade, outorgado pelo Estado. Elas garantem ao titular o direito exclusivo de uso da invenção por um período limitado, protegendo-o da exploração por terceiros.</p>
+                            <div class="accordion-item">
+                                <button class="accordion-button">
+                                    <span>Tipos de Patentes</span>
+                                    <span class="arrow">&#9662;</span>
+                                </button>
+                                <div class="accordion-content">
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>**Patente de Invenção (PI):** Validade de 20 anos, concedida a invenções que sejam novas, possuam atividade inventiva e aplicação industrial.</li>
+                                        <li>**Patente de Modelo de Utilidade (MU):** Validade de 15 anos, concedida a inovações que resultem em melhoria funcional no uso ou fabricação de um objeto.</li>
+                                        <li>**Certificado de Adição de Invenção (C):** Acessório a uma patente já existente, protege um aperfeiçoamento ou desenvolvimento da invenção original.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="legal" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Aspectos Legais e Importância</h2>
+                    <p class="mb-4 text-stone-600">O registro de marcas e a concessão de patentes são regulados pela Lei de Propriedade Industrial (LPI). Esta seção explora os requisitos para registro e as razões pelas quais a proteção da propriedade industrial é vital para a competitividade em mercados estrangeiros.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Requisitos para Registro de Marca e Patente</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2 font-semibold">Para Marcas:</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Veracidade (caráter verdadeiro)</li>
+                                    <li>Liceidade (ser considerada lícita para registro)</li>
+                                    <li>Distintividade (capacidade de diferenciar de outras marcas)</li>
+                                    <li>Disponibilidade (não haver marcas semelhantes já registradas)</li>
+                                </ul>
+                                <p class="mb-2 font-semibold mt-4">Para Patentes:</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Novidade (não estar no estado da técnica)</li>
+                                    <li>Atividade inventiva (não ser óbvio para um técnico no assunto)</li>
+                                    <li>Aplicação industrial (poder ser produzido em escala industrial)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>A Importância da Proteção</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O registro de marca e a concessão de patente outorgam ao proprietário o direito de uso exclusivo, protegendo-o de falsificações, cópias e concorrência desleal. A proteção garante o incentivo à inovação e a segurança jurídica, pois evita a exploração indevida por terceiros.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="international" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Como Proteger no Exterior</h2>
+                    <p class="mb-4 text-stone-600">A proteção da propriedade industrial é territorial, ou seja, um registro nacional não protege a sua marca ou patente no exterior. É necessário depositar o pedido em cada mercado de interesse. Felizmente, existem acordos e tratados internacionais que simplificam este processo. Explore os principais mecanismos:</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Protocolo de Madrid (para Marcas)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Permite solicitar o registro de uma marca em vários países simultaneamente com um único processo, em um único idioma e com pagamento em uma única moeda. O Brasil é signatário desde 2019.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Convenção da União de Paris (CUP)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Assegura um prazo de 12 meses, a partir do primeiro depósito de patente em um país membro, para efetuar depósitos similares nos demais países signatários, garantindo a data de prioridade.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Tratado de Cooperação em Matéria de Patentes (PCT)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Simplifica e torna mais econômica a proteção de invenções, permitindo a requisição de patente em um grande número de países por meio de um único pedido internacional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Cuidados e Recursos</h2>
+                    <p class="mb-6 text-stone-600">Antes de iniciar o processo de proteção, é crucial tomar alguns cuidados. Esta seção lista pontos de atenção e ferramentas para pesquisa e consulta, garantindo que o seu planejamento seja sólido e bem informado.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Pontos de Atenção:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>Não divulgar prematuramente os produtos antes de protegê-los.</li>
+                                <li>Sempre investigar a disponibilidade da marca ou patente no território desejado.</li>
+                                <li>Estar atento às regras que variam de país para país e aos prazos de requisição.</li>
+                                <li>Para patentes, avaliar se depósitos independentes em poucos países não são mais fáceis que o trâmite via PCT.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Links e Ferramentas Úteis:</h3>
+                            <div id="resources-list" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Guia Básico de Patentes (INPI)', description: 'Manual para a solicitação de patentes.', link: 'http://www.inpi.gov.br/servicos/Portal/menu-servicos/patente' },
+                { name: 'Guia Básico de Marcas (INPI)', description: 'Manual para o registro de marcas.', link: 'http://www.inpi.gov.br/servicos/servicos/Portal/menu-servicos/marcas' },
+                { name: 'Protocolo de Madrid (INPI)', description: 'Informações sobre o tratado que simplifica o registro de marcas no exterior.', link: 'http://www.inpi.gov.br/menu-servicos/marcas/protocolo-de-madri-vigencia-razoes-como-dar-entrada-no-pedido-e-preparo-do-inpi' },
+                { name: 'Convenção da União de Paris (CUP)', description: 'Documento oficial do tratado internacional.', link: 'http://www.inpi.gov.br/legislacao-1/cup.pdf' },
+                { name: 'Tratado de Cooperação em Matéria de Patentes (PCT)', description: 'Documento oficial do tratado para patentes.', link: 'https://www.wipo.int/export/sites/www/pct/pt/texts/pdf/pct.pdf' },
+                { name: 'Google Patents', description: 'Mecanismo de busca de patentes.', link: 'https://patents.google.com/' },
+                { name: 'WIPO - Organização Mundial da Propriedade Intelectual', description: 'Portal da organização que gerencia a propriedade intelectual globalmente.', link: 'http://www.wipo.int' },
+                { name: 'TMview', description: 'Ferramenta para verificar a disponibilidade de marcas em diversos países.', link: 'https://www.tmdn.org/tmview/welcome.html?lang=pt' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspectos Operacionais da Exportação Indireta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Aspectos Operacionais (General operational aspects), 2) Incentivos Fiscais (Tax incentives), 3) Regimes Aduaneiros (Customs regimes), and 4) Formação de Preço e Recursos (Pricing and useful resources). This flow progresses from a foundational understanding of operational aspects to specific details on taxes, regimes, and pricing. Interactive elements include accordions to detail each topic. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General operational aspects of indirect export. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Tax incentives for indirect export. Goal: Inform/Organize. Method: Accordions (HTML/JS) for each tax type (ICMS, IPI, PIS/COFINS), detailing how they apply. Justification: Organizes dense tax information into a clean, easy-to-read format.
+        - Report Info: Special customs regimes (RECOF, entreposto). Goal: Inform. Method: Accordions for each regime, explaining its purpose and application in indirect export. Justification: Presents complex legal regimes in a structured format.
+        - Report Info: Price formation. Goal: Inform/Advise. Method: Text blocks explaining the difference between direct and indirect pricing. Justification: Highlights a crucial practical difference for businesses.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Aspectos Operacionais da Exportação Indireta</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um guia sobre os procedimentos fiscais e aduaneiros ao trabalhar com intermediários.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais</button>
+            <button data-tab="incentives" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Incentivos Fiscais</button>
+            <button data-tab="regimes" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Regimes Aduaneiros</button>
+            <button data-tab="pricing" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Formação de Preço e Recursos</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Aspectos Operacionais Relevantes</h2>
+                    <p class="mb-4 text-stone-600">Para trabalhar com exportação indireta, é fundamental entender os aspectos operacionais que a diferenciam da exportação direta. Os intermediários, como trading companies e ECEs, oferecem serviços que simplificam procedimentos operacionais, aduaneiros e logísticos, mas o conhecimento prévio da empresa sobre temas como Classificação Fiscal (SH/NCM) e Incoterms é essencial para uma parceria em pé de igualdade.</p>
+                    
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-semibold text-blue-600 mb-2">Dúvidas Comuns na Exportação Indireta:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li>Incentivos fiscais à exportação.</li>
+                            <li>Regimes aduaneiros especiais.</li>
+                            <li>Formação de preço na exportação indireta.</li>
+                            <li>Emissão e preenchimento de nota fiscal de exportação.</li>
+                            <li>Radar, Siscomex e Declaração Única de Exportação (DU-E).</li>
+                            <li>Confirmação de exportação realizada por intermediário.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="incentives" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Incentivos Fiscais na Exportação Indireta</h2>
+                    <p class="mb-4 text-stone-600">A venda de produtos para intermediários com o fim específico de exportação garante ao produtor os mesmos benefícios fiscais da exportação direta. Esta seção detalha como a desoneração de impostos como ICMS, IPI, PIS/PASEP e COFINS se aplica a esta modalidade, e quais são as responsabilidades em caso de a exportação não ser efetivada.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>ICMS</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">A venda de mercadorias para intermediários com o fim específico de exportação não tem incidência de ICMS. Se a exportação não for efetivada em 90 ou 180 dias, o produtor/vendedor é responsável pelo recolhimento do imposto, com acréscimos legais e penalidades.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>IPI, PIS/PASEP e COFINS</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Os produtos destinados a intermediários com fim específico de exportação saem do estabelecimento industrial com suspensão do IPI, PIS/PASEP e COFINS. A responsabilidade pelo pagamento desses impostos, em caso de não exportação no prazo de 180 dias, é do intermediário (trading company ou ECE).</p>
+                                <p class="mt-2 text-stone-600">A responsabilidade pelo recolhimento do ICMS, entretanto, continua sendo do produtor/vendedor.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Manutenção de Créditos Fiscais</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Os créditos fiscais referentes à aquisição de insumos para a industrialização do produto são garantidos ao produtor/vendedor e não ao intermediário. É vedado aos intermediários a apuração de créditos quando adquirem mercadorias com o fim específico de exportação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="regimes" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Regimes Aduaneiros Especiais</h2>
+                    <p class="mb-4 text-stone-600">No contexto da exportação indireta, alguns regimes aduaneiros especiais oferecem benefícios que podem ser utilizados em conjunto com a modalidade. Esta seção destaca como o RECOF e o Entreposto Aduaneiro se aplicam a essa operação.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>RECOF</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Para comprovar o cumprimento das obrigações de exportação no regime RECOF, a empresa pode computar os valores das vendas realizadas a trading companies ou ECEs. Isso demonstra a integração dos benefícios fiscais com a estratégia de exportação indireta.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Entreposto Aduaneiro</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O regime extraordinário de entreposto aduaneiro é o que permite a armazenagem de mercadorias, em local alfandegado, adquiridas por intermediários para venda externa. Nessa modalidade, os benefícios fiscais são aplicados antes do embarque, com um prazo de 180 dias para a exportação ser efetivada.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pricing" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Formação de Preço e Recursos</h2>
+                    <p class="mb-4 text-stone-600">A formação de preço na exportação indireta segue a mesma lógica da direta, mas com a inclusão do "custo da intermediação". É crucial considerar a comissão acordada ou a margem de lucro do intermediário. Utilize os recursos abaixo para aprofundar seu conhecimento sobre este e outros tópicos.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Formação de Preço na Exportação Indireta</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Na modalidade de agenciamento, a empresa produtora deve incluir o comissionamento do intermediário como um componente do preço. Já na modalidade de compra e venda, a empresa deve considerar a negociação feita com o intermediário, que pode ser responsável por definir o preço final no mercado-alvo.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mt-6 mb-2">Links Úteis:</h3>
+                            <div id="resources-list" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Decreto Lei nº 1.248, de 1972', description: 'Decreto que reconhece as empresas comerciais exportadoras.', link: 'http://www.planalto.gov.br/ccivil_03/decreto-lei/Del1248.htm' },
+                { name: 'Trading Company x ECE (Ministério da Economia)', description: 'Informações oficiais sobre a diferença entre trading companies e empresas comerciais exportadoras.', link: 'http://www.mdic.gov.br/index.php/comercio-exterior/empresa-comercial-exportadora-trading-company' },
+                { name: 'Exportação Indireta e Formas de Exportação (RFB)', description: 'Manual da Receita Federal sobre exportação indireta e suas modalidades.', link: 'http://receita.economia.gov.br/orientacao/aduaneira/manuais/exportacao-portal-unico/situacoes-especiais-na-exportacao/exportacao-indireta' },
+                { name: 'CECIEX', description: 'Portal do Conselho Brasileiro das Empresas Comerciais Exportadoras e Importadoras.', link: 'http://www.ceciex.com.br/' },
+                { name: 'Catálogo de ECEs e Trading Companies do Brazilian Suppliers', description: 'Diretório de empresas intermediárias para exportação.', link: 'http://www.braziliansuppliers.com.br/' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

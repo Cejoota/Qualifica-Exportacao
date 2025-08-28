@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/cargueiro.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles/header.css">
+    <title>Qualifica Exportação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .img-navio {
+            width: 100%;
+            height: 100vh;
+            flex-shrink: 0;
+            z-index: -1;
+            position: absolute;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+
+        .tema-inicial {
+            width: 615px;
+            height: 65px;
+            border-radius: 30px;
+            border: 7px solid #00C8FF;
+            background: rgba(44, 62, 80, 0.70);
+            margin: 5%;
+            cursor: pointer;
+        }
+
+        .tema-inicial:hover {
+            background: #00ff4071;
+            transition: 0.2s;
+        }
+
+        .texto-tema-inicial {
+            color: #FFF;
+            text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.50);
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #000;
+            font-family: Inter;
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            margin: 1px;
+            cursor: pointer;
+        }
+
+        .modulo1,
+        .modulo2,
+        .modulo3,
+        .modulo4 {
+            display: flex;
+            flex-direction: column;
+            width: 25%;
+            height: 29vh;
+            border-radius: 5px;
+            border: 8px solid #00C8FF;
+            background: rgba(44, 62, 80, 0.80);
+        }
+
+        .modulo1:hover,
+        .modulo2:hover,
+        .modulo3:hover,
+        .modulo4:hover {
+            background: #00ff4071;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .modulo1-text,
+        .modulo2-text,
+        .modulo3-text,
+        .modulo4-text {
+            color: #FFF;
+            text-align: center;
+            text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.70);
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #000;
+            font-family: Inter;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            margin-top: 10px;
+        }
+
+        .modulo1-subtext,
+        .modulo2-subtext,
+        .modulo3-subtext,
+        .modulo4-subtext {
+            color: #FFF;
+            text-align: center;
+            text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.70);
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #000;
+            font-family: Inter;
+            font-size: 30px;
+            font-weight: 700;
+            margin: auto;
+        }
+
+        .modulo-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin: 5%;
+            gap: 5%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+
+    <script>
+        function redirecionar() {
+            window.location.href = "../Apresentação Inicial/ApresInic.html";
+        }
+        function modulo1() {
+            window.location.href = "../telas/TelaMod1.html";
+        }
+        function modulo2() {
+            window.location.href = "../telas/TelaMod2.html";
+        }
+        function modulo3() {
+            window.location.href = "../telas/TelaMod3.html";
+        }
+        function modulo4() {
+            window.location.href = "../telas/TelaMod4.html";
+        }
+    </script>
+</head>
+
+<body>
+    <img class="img-navio" src="../assets/tela 2.png" alt="navio com muitos containers">
+    <header>
+        <h1>QUALIFICAÇÃO DE EXPORTAÇÃO</h1>
+    </header>
+
+    <div class="tema-inicial" onclick="redirecionar()">
+        <p class="texto-tema-inicial">APRESENTAÇÃO INICIAL</p>
+    </div>
+
+    <section class="modulo-box">
+        <div class="modulo-container">
+            <div class="modulo1" onclick="modulo1()">
+                <p class="modulo1-text">MÓDULO 1</p>
+                <p class="modulo1-subtext">Introdução e Estratégia à Exportação</p>
+            </div> 
+            <div class="modulo2" onclick="modulo2()">
+                <p class="modulo2-text">MÓDULO 2</p>
+                <p class="modulo2-subtext">Marketing e Negócios Internacionais</p>
+            </div>
+            <div class="modulo3" onclick="modulo3()">
+                <p class="modulo3-text">MÓDULO 3</p>
+                <p class="modulo3-subtext">Logística Aduaneira e Internacional</p>
+            </div>
+            <div class="modulo4" onclick="modulo4()">
+                <p class="modulo4-text">MÓDULO 4</p>
+                <p class="modulo4-subtext">Finanças Internacionais</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

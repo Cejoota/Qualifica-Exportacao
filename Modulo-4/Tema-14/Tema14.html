@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Formação de Preços para Exportação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais e Influenciadores (General concepts and influencing factors), 2) Estratégias de Preço (Pricing strategies), and 3) Cálculo e Recursos (Price calculation and useful resources). This flow progresses from foundational knowledge to practical strategies and a detailed calculation example. Interactive elements include accordions and a simple calculator-style display for a pricing example. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts of pricing and influencing factors. Goal: Inform/Organize. Method: Text blocks and bulleted lists. Justification: Clearly presents foundational information.
+        - Report Info: Pricing strategies (cost-based, market-based, value-based). Goal: Inform/Compare. Method: Accordions (HTML/JS) for each strategy. Justification: Organizes detailed information about each strategy into a clean, easy-to-read format.
+        - Report Info: Pricing calculation example. Goal: Explain/Demonstrate. Method: A simplified table-like display with deductions and additions to calculate a final price. Justification: A step-by-step example makes the complex process of price calculation more understandable.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Formação de Preços para Exportação</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Entenda os fatores, estratégias e o cálculo para definir o preço de seus produtos no mercado global.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Fatores</button>
+            <button data-tab="strategies" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Estratégias de Precificação</button>
+            <button data-tab="calculation" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Cálculo e Recursos</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Gerais e Fatores que Influenciam o Preço</h2>
+                    <p class="mb-4 text-stone-600">A decisão sobre o preço de exportação é estratégica e afeta a competitividade da empresa no mercado global. Uma formação incorreta pode levar a perda de margem de lucro, não aceitação do produto e prejuízos. É fundamental considerar os diversos fatores que influenciam o preço, desde os custos internos até as características do mercado-alvo.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Fatores de Influência:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Relacionados à empresa:** Objetivos, custos de fabricação e P&D.</li>
+                                <li>**Relacionados ao produto:** Tipo, design, embalagem e inovações.</li>
+                                <li>**Relacionados ao mercado-alvo:** Demanda, poder aquisitivo do consumidor, políticas cambiais e tarifárias.</li>
+                                <li>**Relacionados à negociação:** Incoterms, quantidade vendida, despesas de frete e seguro.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Considerações Preliminares:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>O preço deve ser formado antes da negociação, com uma margem de ajuste.</li>
+                                <li>O modal de transporte e o Incoterm negociado são os elementos que mais influenciam o preço.</li>
+                                <li>A precificação deve considerar o tripé: custos, clientes e concorrentes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="strategies" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Estratégias de Precificação</h2>
+                    <p class="mb-4 text-stone-600">Existem diferentes abordagens para a formação de preços, cada uma com seus prós e contras. A escolha da estratégia correta depende dos objetivos da sua empresa e da dinâmica do mercado. Explore as opções abaixo para entender qual delas se encaixa melhor em seu negócio.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Estratégia Baseada em Custos</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O preço é calculado a partir dos custos envolvidos na atividade. Pode ser feito por **Markup** (acréscimo de uma porcentagem), **taxa de retorno** (adição de uma taxa desejada) ou **análise do ponto de equilíbrio**.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Estratégia Baseada no Mercado (Concorrência)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O preço é definido com base nos preços praticados pelos concorrentes. A empresa pode optar por um preço **abaixo**, **igual** ou **acima** da concorrência, buscando se diferenciar em outras áreas.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Estratégia Baseada no Valor Percebido (Cliente)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">A precificação é baseada no quanto o cliente está disposto a pagar. É a estratégia mais subjetiva e menos usada, mas que pode gerar maior margem. Envolve o **preço por prestígio**, **preço não arredondado** ou **preço por pacote**.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Estratégias de Ajustes e Efeitos Psicológicos</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O preço pode ser ajustado frequentemente com **descontos por quantidade**, **sazonais**, **comerciais** e **promocionais**. A psicologia do preço também pode ser utilizada com o uso de preços terminados em ".99", ofertas "De/Por" e descontos percentuais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="calculation" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Cálculo de Preço de Exportação (Exemplo)</h2>
+                    <p class="mb-4 text-stone-600">Um método comum para calcular o preço de exportação é partir do preço de venda no mercado interno e realizar deduções e adições de custos. O exemplo abaixo ilustra essa metodologia. **Atenção:** Este é apenas um exemplo. A formação de preço real deve considerar a legislação específica de cada empresa e mercado.</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse mt-2 text-sm">
+                            <thead>
+                                <tr class="bg-stone-100">
+                                    <th class="p-2 font-semibold text-stone-700 border-b border-stone-200" colspan="2">Preço no Mercado Interno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2">Preço de Venda</td>
+                                    <td class="p-2">R$ 15,00</td>
+                                </tr>
+                                <tr class="border-b border-stone-200 text-green-700">
+                                    <td class="p-2">(-) Deduções (Impostos, despesas internas, lucro)</td>
+                                    <td class="p-2">R$ 10,18</td>
+                                </tr>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2 font-bold">Subtotal</td>
+                                    <td class="p-2 font-bold">R$ 4,82</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="w-full text-left border-collapse mt-6 text-sm">
+                            <thead>
+                                <tr class="bg-stone-100">
+                                    <th class="p-2 font-semibold text-stone-700 border-b border-stone-200" colspan="2">Preço para Exportação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-stone-200 text-red-700">
+                                    <td class="p-2">(+) Adições (Comissão, embalagem, taxas, frete, seguro, lucro)</td>
+                                    <td class="p-2">R$ 12,32</td>
+                                </tr>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2 font-bold">Subtotal</td>
+                                    <td class="p-2 font-bold">R$ 17,14</td>
+                                </tr>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2 font-bold">Preço Final em Dólar</td>
+                                    <td class="p-2 font-bold">U$ 7,81</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold text-blue-600 mt-6 mb-2">Links Úteis:</h3>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Simulador de preços (MDIC)', description: 'Ferramenta para simular a formação de preço de exportação.', link: 'https://siscomex.mdic.gov.br/simulador-de-precos/' },
+                { name: 'SEBRAE Nacional - Como definir o preço do produto no exterior', description: 'Guia do SEBRAE sobre precificação para exportação.', link: 'https://www.sebrae.com.br/sites/PortalSebrae/artigos/como-definir-o-preco-do-produto-no-exterior,376722c079f93410VgnVCM1000003b74010aRCRD' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

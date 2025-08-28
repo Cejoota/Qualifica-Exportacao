@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Prático para a Exportação Indireta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the practical aspects of working with indirect exporting into three key areas: 1) Modalidades de Contratação (Contracting Modalities), 2) Seleção do Parceiro (Partner Selection), and 3) Importância do Contrato (Contract Importance). This flow guides the user from choosing a contract type to selecting a partner and formalizing the relationship. Interactive elements include accordions to present detailed information on each topic. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Contracting modalities (agency vs. buy/sell). Goal: Inform. Method: Accordions (HTML/JS) to detail each modality. Justification: Organizes two distinct and detailed concepts clearly without cluttering the page.
+        - Report Info: Partner selection criteria. Goal: Inform/Organize. Method: A list of key criteria. Justification: Clear and easy to scan for quick reference.
+        - Report Info: Importance of the contract and relationship. Goal: Inform/Advise. Method: Bulleted lists. Justification: Highlights critical legal and ethical points.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia Prático para a Exportação Indireta</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo sobre como contratar e trabalhar com intermediários de comércio exterior.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="modalities" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Modalidades de Contratação</button>
+            <button data-tab="selection" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Seleção do Parceiro</button>
+            <button data-tab="contract" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Importância do Contrato</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="modalities" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Modalidades de Contratação de Intermediários</h2>
+                    <p class="mb-4 text-stone-600">Ao contratar um intermediário para exportação indireta, sua empresa não fica isenta de responsabilidades no mercado de destino. Conhecer as modalidades de contratação é fundamental para entender o papel de cada parte e as responsabilidades envolvidas. Explore as duas formas principais:</p>
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Contratos de Agenciamento ou Representação Comercial</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Nesta modalidade, o intermediário se dedica à prospecção de clientes internacionais, recebendo uma comissão pelas vendas realizadas. A responsabilidade pelos trâmites operacionais (documentação, logística e aduana) continua sendo da empresa contratante.</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>O intermediário age como um agente de distribuição, focado na conquista de mercados.</li>
+                                    <li>A exportadora oficial continua sendo a empresa produtora.</li>
+                                    <li>É ideal para produtos que demandam assistência técnica e serviços agregados no destino.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Contratos de Compra e Venda</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Aqui, a empresa vende o produto ao intermediário no mercado nacional, e a responsabilidade por todo o processo de exportação (incluindo preço final) é do intermediário.</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>A trading company ou ECE compra o produto para revendê-lo no exterior.</li>
+                                    <li>É crucial formalizar o contrato com clareza sobre produtos, prazos de entrega e condições de pagamento.</li>
+                                    <li>O intermediário deve comprovar a exportação para garantir benefícios fiscais.</li>
+                                </ul>
+                                <p class="mt-4">Uma empresa pode, inclusive, contratar diferentes intermediários para atuar em mercados distintos, mas deve evitar ter dois intermediários para o mesmo produto no mesmo mercado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="selection" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Critérios para a Seleção do Parceiro</h2>
+                    <p class="mb-4 text-stone-600">A escolha do intermediário certo é uma decisão estratégica. Utilize os critérios a seguir para avaliar e selecionar a "trading company" ou ECE que melhor se alinha às necessidades da sua empresa. A prospecção pode ser facilitada através de diretórios e bases de dados especializados.</p>
+                    <div class="space-y-4">
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li>Experiência do intermediário no seu setor de atuação.</li>
+                            <li>Experiência do intermediário no mercado-alvo desejado.</li>
+                            <li>Conhecimento das características do seu produto.</li>
+                            <li>Análise do portfólio do intermediário e suas referências de mercado.</li>
+                            <li>Idoneidade e estrutura de atendimento (equipe e logística).</li>
+                            <li>Verificação se a empresa consta na relação oficial de empresas habilitadas.</li>
+                        </ul>
+                        <h3 class="text-xl font-semibold text-blue-600 mt-6">Canais para Prospecção:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li>Diretórios de comerciais exportadoras.</li>
+                            <li>Bases de associados de entidades de comércio exterior.</li>
+                            <li>Relação de empresas habilitadas em portais governamentais.</li>
+                            <li>Câmaras de Comércio e Associações Comerciais.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contract" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">A Importância do Contrato e da Parceria</h2>
+                    <p class="mb-4 text-stone-600">O contrato é a base da relação comercial com seu intermediário. Ele assegura os direitos e deveres de ambas as partes e previne conflitos. Mais do que um documento, a relação deve ser pautada em uma parceria transparente e ética para garantir o sucesso mútuo.</p>
+                    <div class="space-y-4 text-stone-700">
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>O contrato deve ter um objeto e escopo bem definidos, claros e detalhados.</li>
+                            <li>Aspectos críticos a serem definidos incluem a remuneração e a forma de relacionamento com os clientes no destino.</li>
+                            <li>É importante prever cláusulas para destrato e indenizações, caso necessário.</li>
+                        </ul>
+                        <h3 class="text-xl font-semibold text-blue-600 mt-6">Aspectos Essenciais para uma Parceria de Sucesso:</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>**Parceria e Cooperação:** Trabalhar em conjunto para o sucesso do projeto.</li>
+                            <li>**Transparência e Clareza:** Ser transparente sobre as capacidades da empresa e evitar esconder informações.</li>
+                            <li>**Relacionamento Ético:** Evitar práticas desleais, como ofertar o mesmo produto a intermediários concorrentes no mesmo mercado.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis e Links</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre exportação indireta e encontrar intermediários, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+
+            const resourcesData = [
+                { name: 'Trading Company x ECE (Ministério da Economia)', description: 'Informações oficiais sobre a diferença entre trading companies e empresas comerciais exportadoras.', link: 'http://www.mdic.gov.br/index.php/comercio-exterior/empresa-comercial-exportadora-trading-company' },
+                { name: 'Exportação Indireta e Formas de Exportação (RFB)', description: 'Manual da Receita Federal sobre exportação indireta e suas modalidades.', link: 'http://receita.economia.gov.br/orientacao/aduaneira/manuais/exportacao-portal-unico/situacoes-especiais-na-exportacao/exportacao-indireta' },
+                { name: 'Catálogo de ECEs e Trading Companies do Brazilian Suppliers', description: 'Diretório de empresas intermediárias para exportação.', link: 'http://www.braziliansuppliers.com.br/' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' },
+                { name: 'CECIEX', description: 'Base de associados do Conselho Brasileiro das Empresas Comerciais Exportadoras e Importadoras.', link: 'http://www.ceciex.com.br/' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = content.style.display === 'block';
+
+                    if (isExpanded) {
+                        content.style.display = 'none';
+                        button.classList.remove('active');
+                    } else {
+                        content.style.display = 'block';
+                        button.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

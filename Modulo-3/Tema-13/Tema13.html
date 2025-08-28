@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Regimes Aduaneiros Especiais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais (General concepts), 2) Drawback (The main special customs regime), 3) Outros Regimes (Other special regimes like Temporary Export and RECOF), and 4) Recursos Úteis (Useful resources). This flow progresses from foundational knowledge to specific regimes, making the content easily digestible and actionable. Interactive elements include accordions to detail each regime. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts of special customs regimes. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Drawback modalities and restrictions. Goal: Inform/Organize. Method: Accordions (HTML/JS) for each modality and a bulleted list for restrictions. Justification: Organizes dense information into a clean, easy-to-read format.
+        - Report Info: Other special regimes (Temporary Export, RECOF, REPEX, etc.). Goal: Inform. Method: Accordions for each regime, explaining its purpose and requirements. Justification: Presents complex legal regimes in a structured format.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Regimes Aduaneiros Especiais</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo sobre as exceções fiscais e logísticas para o comércio exterior.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais</button>
+            <button data-tab="drawback" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Drawback</button>
+            <button data-tab="other_regimes" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Outros Regimes</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Gerais sobre Regimes Aduaneiros</h2>
+                    <p class="mb-4 text-stone-600">Regimes aduaneiros especiais são exceções às regras gerais de impostos e controles aduaneiros, concedendo isenções ou suspensões de tributos. Eles são usados na importação e exportação de bens e ajudam a aumentar a competitividade do produto no mercado internacional.</p>
+                    
+                    <div class="space-y-4">
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li>**Território Aduaneiro:** Corresponde a todo o território nacional, incluindo mar territorial, águas territoriais e espaço aéreo.</li>
+                            <li>Os regimes especiais geram maior competitividade e são importantes para ações de promoção comercial no exterior, como feiras e exposições.</li>
+                            <li>A Receita Federal do Brasil (RFB) é a principal fonte de consulta para informações sobre os regimes vigentes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="drawback" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Drawback: O Principal Regime Aduaneiro</h2>
+                    <p class="mb-4 text-stone-600">O regime aduaneiro especial de Drawback é um dos principais incentivos à exportação, permitindo a suspensão ou isenção de tributos sobre insumos importados ou adquiridos no mercado interno, que serão utilizados na produção de bens a serem exportados.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Benefícios e Vantagens</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Importação ou compra de insumos com suspensão de tributos (II, IPI, PIS/PASEP, COFINS, ICMS, etc.).</li>
+                                    <li>Isenção do pagamento dos tributos suspensos na exportação.</li>
+                                    <li>Redução nas taxas de armazenagem.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Modalidades de Drawback</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>**Suspensão:** Suspensão de tributos para insumos usados na industrialização de produto a ser exportado (exportação futura).</li>
+                                    <li>**Isenção:** Isenção de tributos na importação de insumos equivalentes para repor estoque usado em produto já exportado (exportação prévia).</li>
+                                    <li>**Restituição:** Restituição de tributos pagos em insumos usados em produto exportado (modalidade pouco utilizada).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Restrições do Drawback</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O benefício não pode ser utilizado por microempresas e empresas de pequeno porte do Simples Nacional. Também há restrições para importação de mercadoria utilizada na industrialização de produto destinado à Zona Franca de Manaus e áreas de livre comércio.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="other_regimes" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Outros Regimes Aduaneiros Especiais</h2>
+                    <p class="mb-4 text-stone-600">Além do Drawback, existem outros regimes especiais que oferecem benefícios para diferentes tipos de operações. Esta seção detalha regimes como Exportação Temporária, RECOF, RECOF-SPED, REPEX, Trânsito Aduaneiro, Entreposto Aduaneiro e Depósito Alfandegado Certificado.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Exportação Temporária</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Permite a saída de mercadorias do país com suspensão do imposto de exportação, com a condição de retorno em prazo determinado. É usado para eventos, pesquisas, promoção comercial, entre outros.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>RECOF e RECOF-SPED</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Permitem importar ou adquirir no mercado interno, com suspensão de tributos, mercadorias para industrialização de produtos destinados à exportação ou ao mercado interno.</p>
+                                <p class="mt-2 text-stone-600">O **RECOF-SPED** é uma modalidade mais simplificada, que utiliza registros em livros contábeis digitais, sem a necessidade de um sistema informatizado caro.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>REPEX</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Regime para importação de petróleo bruto e seus derivados com suspensão de tributos, para posterior exportação no mesmo estado em que foram importados.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Trânsito Aduaneiro</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Permite o transporte de mercadorias entre pontos do território aduaneiro com suspensão de tributos, tornando o desembaraço mais flexível.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Entreposto Aduaneiro</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Permite o armazenamento de mercadorias em recintos alfandegados com benefícios fiscais, antes da sua exportação definitiva. É muito utilizado por trading companies.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Depósito Alfandegado Certificado (DAC)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Permite considerar uma mercadoria nacional como exportada, mesmo que ela não saia fisicamente do país, mas seja vendida a uma pessoa no exterior e depositada em um recinto alfandegado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre regimes aduaneiros especiais e consultar a legislação, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Regimes Aduaneiros Especiais (RFB)', description: 'Informações sobre os regimes aduaneiros especiais diretamente da Receita Federal.', link: '#' },
+                { name: 'Manual de Drawback', description: 'Manual oficial sobre o regime aduaneiro especial de Drawback.', link: '#' },
+                { name: 'Manual de Exportação Temporária', description: 'Manual oficial sobre o regime de Exportação Temporária.', link: '#' },
+                { name: 'RECOF e RECOF-SPED', description: 'Informações detalhadas sobre os regimes de Recof e Recof-Sped.', link: '#' },
+                { name: 'Guia “Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: '#' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

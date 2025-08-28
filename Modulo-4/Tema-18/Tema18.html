@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Riscos e Garantias nas Operações Internacionais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais e Riscos (General concepts and risk types), 2) Formas de Mitigar (Risk mitigation strategies), and 3) Seguro de Crédito e Recursos (Credit insurance and useful resources). This flow progresses from a foundational understanding of risks to practical mitigation techniques and specific financial instruments, making the content easily digestible and actionable. Interactive elements include accordions to detail each risk type and mitigation method. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts of risk and risk types. Goal: Inform/Organize. Method: Text blocks and accordions for each risk type. Justification: Organizes detailed information into a clean, easy-to-read format.
+        - Report Info: Risk mitigation methods. Goal: Advise/Explain. Method: Accordions for different mitigation strategies (e.g., commercial risk, country risk). Justification: Presents a structured approach to solving specific problems.
+        - Report Info: Credit insurance. Goal: Inform/Explain. Method: Accordions detailing the purpose, coverage, and modalities of credit insurance. Justification: Breaks down a complex financial product into understandable parts.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Riscos e Garantias nas Operações Internacionais</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo para identificar, mitigar e proteger suas operações de comércio exterior.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="risks" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais e Tipos de Riscos</button>
+            <button data-tab="mitigation" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Formas de Mitigar os Riscos</button>
+            <button data-tab="insurance" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Seguro de Crédito e Recursos</button>
+        </nav>
+
+        <main>
+            <section id="risks" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Gerais e Tipos de Riscos</h2>
+                    <p class="mb-4 text-stone-600">Risco é a probabilidade de um evento causar insucesso em uma operação, independentemente da vontade dos envolvidos. Nas operações internacionais, os riscos não podem ser completamente eliminados, mas podem ser mitigados. Esta seção detalha os principais tipos de riscos que uma empresa pode enfrentar.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Risco Comercial</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Possibilidade de o comprador estrangeiro não honrar ou atrasar o pagamento, ou de sua insolvência (concordata ou falência).</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Risco-País</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Risco de fazer negócios com um determinado país devido ao seu grau de instabilidade econômica. Inclui:</p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li>**Risco Político:** Medidas unilaterais do governo que impedem o cumprimento de obrigações.</li>
+                                    <li>**Risco Mercadológico:** Fatores de mercado (juros, câmbio) que impactam valores e preços.</li>
+                                    <li>**Risco Geográfico:** Fatores climáticos, geológicos ou geopolíticos (conflitos, guerras).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Risco Financeiro e Cambial</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Risco associado à volatilidade das variáveis de mercado e do câmbio, que pode impactar o valor da negociação com moedas estrangeiras.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mitigation" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Estratégias de Mitigação de Riscos</h2>
+                    <p class="mb-4 text-stone-600">Para mitigar os riscos, o exportador pode tomar providências e recorrer a garantias de terceiros. As estratégias variam para cada tipo de risco. Esta seção detalha como lidar com os riscos comercial, país e financeiro/cambial.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Mitigação do Risco Comercial</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Sugere-se realizar uma avaliação cadastral do importador, consultando empresas especializadas ou referências. Para falência ou concordata, a existência de um contrato internacional robusto é fundamental.</p>
+                                <p class="mt-2 text-stone-600">Em pagamentos antecipados, o importador pode exigir uma garantia, como o **"Refundment Bond"**, para assegurar que a mercadoria será entregue.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Mitigação do Risco-País</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Recomenda-se o acompanhamento das classificações de risco de agências especializadas (Moody's, S&P, Fitch). A carta de crédito, especialmente se confirmada por um banco de primeira linha, é um instrumento que mitiga o risco-país.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Mitigação do Risco Financeiro e Cambial</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">Para garantir a taxa de câmbio e eliminar o risco de flutuações, a empresa pode utilizar mecanismos como **ACC** (Adiantamento sobre Contratos de Câmbio), **ACE** (Adiantamento sobre Cambiais de Exportação) e **trava cambial**.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Mitigação em Diferentes Modalidades de Pagamento</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>**Cobrança Documentária:** O exportador pode emitir o conhecimento de embarque "à ordem do banqueiro" para ter maior controle sobre a mercadoria.</li>
+                                    <li>**Carta de Crédito:** Oferece a maior garantia. Para mitigar o risco do banco emitente, o exportador pode solicitar a confirmação da carta com um banco de primeira linha.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="insurance" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Seguro de Crédito à Exportação (SCE)</h2>
+                    <p class="mb-4 text-stone-600">O Seguro de Crédito à Exportação (SCE) é um instrumento que garante operações de crédito contra riscos comerciais, políticos e extraordinários. É uma cobertura da União, com lastro no Fundo de Garantia à Exportação (FGE), e é gerenciado pela Agência Brasileira Gestora de Fundos e Garantias (ABGF).</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Cobertura e Modalidades</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O SCE não tem restrições de setores ou produtos. A cobertura pode ser em duas fases: a de fabricação (pré-crédito) e a de pós-embarque. Existem modalidades específicas para operações de médio e longo prazo (MLP) e para Micro, Pequenas e Médias Empresas (MPME).</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Premiação e Custos</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O prêmio de risco é calculado com base no prazo da operação, na classificação de risco do devedor e nos mitigadores de risco. Os valores podem ser usados para compensar outros tributos federais.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mt-6 mb-2">Recursos Úteis:</h3>
+                            <div id="resources-list" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Guia “Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'https://www.gov.br/siscomex/pt-br/servicos/aprendendo-a-exportar' },
+                { name: 'CAMEX', description: 'Portal da Câmara de Comércio Exterior.', link: 'http://www.camex.gov.br/' },
+                { name: 'Agência Brasileira Gestora de Fundos Garantidos e Garantias S.A. (ABGF)', description: 'Portal da agência responsável pelos serviços de garantia de crédito.', link: 'http://www.abgf.gov.br/negocios/sce-medio-e-longo-prazo/' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Adequação de Produtos e Embalagens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into four key areas: 1) Noções Básicas (Basic concepts and strategies), 2) Critérios de Avaliação (Evaluation criteria for products and packaging), 3) Checklist de Adequação (An interactive checklist tool), and 4) Recursos Úteis (Useful resources). This flow guides the user from foundational knowledge to a practical assessment tool, making the content easily digestible and actionable. Interactive elements include accordions and a clickable checklist. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Standardization vs. adaptation. Goal: Compare. Method: An accordion that reveals a comparative table. Justification: Organizes detailed pros and cons clearly without cluttering the page.
+        - Report Info: Evaluation criteria for products and packaging. Goal: Inform/Organize. Method: Bulleted lists. Justification: Clearly presents key criteria for assessment.
+        - Report Info: Checklist for packaging. Goal: Organize/Track. Method: A series of accordions with interactive checklists inside. Justification: Provides a practical, actionable tool for users to assess their packaging against key dimensions.
+        - Report Info: Useful links and initiatives. Goal: Inform/Provide access. Method: A styled list of links and a section on support initiatives. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .checklist-item {
+            padding-left: 2rem;
+            position: relative;
+        }
+        .checklist-item input {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Adequação de Produtos e Embalagens</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo para adequar seus produtos e embalagens ao mercado externo.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Básicas</button>
+            <button data-tab="criteria" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Critérios de Avaliação</button>
+            <button data-tab="checklist" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Checklist de Embalagens</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Padronizar ou Adaptar: A Conexão Estratégica</h2>
+                    <p class="mb-4 text-stone-600">A decisão de adaptar ou padronizar um produto e sua embalagem é crucial para o sucesso no mercado externo. A embalagem é um elemento interligado ao produto, comunicando suas características e agregando valor estético. A escolha da estratégia correta deve ser baseada em uma análise cuidadosa das exigências do país de destino.</p>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-button">
+                            <span>Vantagens e Desvantagens</span>
+                            <span class="arrow">&#9662;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse mt-2 text-sm">
+                                    <thead>
+                                        <tr class="bg-stone-100">
+                                            <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Estratégia</th>
+                                            <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Vantagens</th>
+                                            <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Desvantagens</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-stone-200">
+                                            <td class="p-2 font-semibold text-blue-700">Padronização</td>
+                                            <td class="p-2">Redução de custos; Facilita o controle; Economias de escala.</td>
+                                            <td class="p-2">Ignora diferenças culturais e de uso; Inviabiliza ações de marketing local.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 font-semibold text-blue-700">Adaptação</td>
+                                            <td class="p-2">Reflete diferentes condições de uso; Reconhece diferenças locais; Viabiliza ações de marketing local.</td>
+                                            <td class="p-2">Aumenta os custos; Dificulta o controle; Reduz economias de escala.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-blue-600 mt-6">Motivadores para Adaptação:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li>**Inovação Estratégica:** Modificar o produto para se diferenciar da concorrência.</li>
+                        <li>**Exigências do Importador:** Baseadas em barreiras tarifárias e não tarifárias, e no perfil do consumidor.</li>
+                        <li>**Certificações e Licenças:** Necessárias para atender às regulamentações locais de segurança, saúde e meio ambiente.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="criteria" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Critérios para Avaliação de Produtos e Embalagens</h2>
+                    <p class="mb-4 text-stone-600">A adaptação de produtos e embalagens deve ser fundamentada em critérios claros. Esta seção detalha os pontos a serem considerados para garantir que seu produto atenda às expectativas do mercado e do comprador, desde suas características físicas até aspectos culturais e logísticos.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Critérios de Avaliação de Produtos:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Tipo de produto:** Avaliar a possibilidade e facilidade de adaptação.</li>
+                                <li>**Aspectos físicos:** Considerar dimensões, peso, resistência, durabilidade, e matéria-prima.</li>
+                                <li>**Mercado de destino:** Nível de desenvolvimento, regulamentação nacional e questões geográficas.</li>
+                                <li>**Concorrência:** Necessidade de diferenciação em mercados com muitos concorrentes.</li>
+                                <li>**Marca e Cultura:** Manter a identidade da marca e considerar a cultura local do cliente.</li>
+                                <li>**Shelf life:** Formas de preservar a validade do produto, considerando a distância do mercado.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">Critérios de Avaliação de Embalagens:</h3>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>**Características do mercado-alvo:** Alinhar a embalagem às tendências e padrões oficiais.</li>
+                                <li>**Preservação:** Manter os atributos de apresentação, identificação, proteção e conservação.</li>
+                                <li>**Tipos de embalagens:** Adequar as embalagens primárias, secundárias e terciárias.</li>
+                                <li>**Design e Logomarca:** Considerar formas, cores e a identidade visual da empresa.</li>
+                                <li>**Funcionalidade e Logística:** Avaliar a capacidade de proteção e a adequação ao transporte e estocagem.</li>
+                                <li>**Rotulagem e Idioma:** Incluir comunicações essenciais e traduzir para o(s) idioma(s) do destino.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="checklist" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Checklist de Adequação de Embalagens</h2>
+                    <p class="mb-4 text-stone-600">Utilize este checklist prático para avaliar se a sua embalagem está pronta para o mercado externo. Ele está dividido em quatro dimensões: posicionamento, diferenciação, especificações técnicas e marketing. Marque os itens concluídos para acompanhar o progresso.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Dimensão 1: Embalagem como Apoio ao Posicionamento</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="space-y-2 text-stone-700">
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem transmite as características e a forma de consumo do produto?</li>
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem faz referências à qualidade e hierarquiza as informações?</li>
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem está traduzida no idioma do mercado-alvo?</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Dimensão 2: Embalagem como Recurso de Diferenciação</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="space-y-2 text-stone-700">
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem possui uma forma ou cor que a diferencia da concorrência?</li>
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem apresenta funcionalidade ou facilidade de manuseio/uso?</li>
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> O logotipo e a linguagem visual estão de acordo com o segmento-alvo?</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Dimensão 3: Especificações Técnicas da Embalagem</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="space-y-2 text-stone-700">
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem atende às exigências de rotulagem do país-alvo?</li>
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> Os textos legais e tabelas nutricionais estão corretos?</li>
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem é resistente ao frete internacional e à armazenagem?</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Dimensão 4: Embalagem como Marketing</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="space-y-2 text-stone-700">
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem apresenta painéis que remetem à marca e ao produto?</li>
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> O verso da embalagem é usado como ferramenta de marketing?</li>
+                                    <li class="checklist-item"><input type="checkbox" class="mr-2"> A embalagem destaca o site, mídias sociais ou possui um QR Code funcional?</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis e Links</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento e encontrar informações sobre adequação de produtos e embalagens, aqui está uma lista de links e recursos úteis. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Mapa de exigências técnicas (INMETRO)', description: 'Pesquisa de exigências técnicas por país e produto.', link: 'http://www.inmetro.gov.br/barreirastecnicas/ExigenciasTecnicas/pesquisa_exigencias.asp' },
+                { name: 'Standards Map (ITC)', description: 'Ferramenta para identificar normas voluntárias e códigos de conduta.', link: 'http://www.standardsmap.org/identify' },
+                { name: 'SEM Barreiras', description: 'Sistema Eletrônico de Monitoramento de Barreiras às Exportações.', link: 'http://sembarreiras.gov.br/painel' },
+                { name: 'Estudo "Embalagens para Exportação"', description: 'Estudo detalhado sobre embalagens, com ênfase em alimentos e bebidas.', link: 'http://arq.apexbrasil.com.br/portal/Embalagens_Exportacao.pdf' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' },
+                { name: 'SEBRAETEC (SEBRAE)', description: 'Iniciativa que trabalha com design, inovação e tecnologia.', link: 'https://www.sebrae.com.br/sites/PortalSebrae/Programas/sebraetec-inovar-no-seu-negocio-pode-ser-facil,c38a5415e6433410VgnVCM1000003b74010aRCRD' },
+                { name: 'PROGEX (IPT)', description: 'Programa de apoio tecnológico à exportação para melhoria de qualidade.', link: 'https://www.ipt.br/solucoes/252-progex_%E2%80%93_programa_de_apoio_tecnologico_a_exportacao.htm' },
+                { name: 'SIBRATEC (FINEP)', description: 'Apoio ao desenvolvimento tecnológico e aumento da competitividade.', link: 'http://www.finep.gov.br/apoio-e-financiamento-externa/programas-e-linhas/sibratec' },
+                { name: 'SENAI', description: 'Consultorias e cursos para melhoria de processos e produtividade.', link: 'http://www.portaldaindustria.com.br/senai/' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

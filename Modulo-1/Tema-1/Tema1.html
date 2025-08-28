@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de Classificação Fiscal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the detailed information about fiscal classification into digestible sections: 1) Visão Geral, 2) Sistemas de Classificação, 3) Consequências e Boas Práticas, and 4) Ferramentas e Recursos. This allows users to easily navigate between foundational concepts, detailed system explanations, critical warnings, and practical tools. Interactive elements like accordions and a visual code breakdown enhance understanding of complex structures. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Importance of fiscal classification. Goal: Inform. Method: Text blocks. Justification: Clear and concise.
+        - Report Info: SH and NCM structure. Goal: Organize/Inform. Method: Accordions for detailed explanations and an interactive HTML/CSS/JS diagram to visually break down the code structure (e.g., NCM 0901.11.10). Interaction: Hover/click on code segments to reveal their meaning. Justification: Makes complex numerical structures understandable and engaging.
+        - Report Info: Consequences of errors and best practices. Goal: Inform/Alert. Method: Bulleted lists. Justification: Highlights critical information effectively.
+        - Report Info: External tools and resources. Goal: Inform/Provide access. Method: Clickable list of links with descriptions. Justification: Direct access to practical resources.
+        - Library/Method: Vanilla JS for all interactions, HTML/CSS for visual elements. No Chart.js or Plotly.js are used as the data is primarily textual and structural, not quantitative for charting.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .code-segment {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            font-weight: bold;
+            color: #1e40af; /* Darker blue for code segments */
+            transition: background-color 0.2s ease;
+        }
+        .code-segment:hover {
+            background-color: #bfdbfe; /* Light blue on hover */
+            border-radius: 4px;
+        }
+        .code-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #334155; /* Slate-700 */
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 10;
+            margin-bottom: 8px; /* Space between segment and tooltip */
+        }
+        .code-segment:hover .code-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        .code-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: #334155 transparent transparent transparent;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia Interativo de Classificação Fiscal</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Compreenda a importância e a estrutura da classificação fiscal de mercadorias para o comércio internacional.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="overview" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Visão Geral</button>
+            <button data-tab="systems" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Sistemas de Classificação</button>
+            <button data-tab="consequences" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Consequências e Boas Práticas</button>
+            <button data-tab="tools" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Ferramentas e Recursos</button>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Classificação Fiscal de Mercadorias: Visão Geral</h2>
+                    <p class="mb-4 text-stone-600">Esta seção apresenta os conceitos fundamentais da classificação fiscal de mercadorias. A correta classificação é um pilar essencial para qualquer operação de comércio, tanto no mercado interno quanto no internacional. Entender sua importância é o primeiro passo para garantir conformidade e eficiência nas suas transações comerciais.</p>
+                    <div class="space-y-4 text-stone-700">
+                        <h3 class="text-xl font-semibold text-blue-600">Importância da Classificação Fiscal Harmonizada e Uniforme:</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Fundamental para determinar alíquotas de impostos, aplicação de medidas de defesa comercial e estatísticas de comércio internacional.</li>
+                            <li>Aplicável nas operações do mercado interno e também nas do mercado externo.</li>
+                            <li>Facilita o comércio internacional, negociações tarifárias e acordos.</li>
+                            <li>Viabiliza análises e dados estatísticos.</li>
+                            <li>Cria uma linguagem "aduaneira" comum.</li>
+                            <li>Reduz custos e encargos.</li>
+                        </ul>
+                        <p class="mt-4">A padronização fiscal facilita a concordância entre vendedor, comprador e demais envolvidos nos processos de comércio internacional, promovendo maior fluidez e segurança nas operações.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="systems" class="content-section">
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Sistemas de Classificação Internacional</h2>
+                     <p class="mb-6 text-stone-600">Nesta seção, você aprenderá sobre os principais sistemas de classificação de mercadorias utilizados globalmente e regionalmente. O Sistema Harmonizado (SH) é a base para o "idioma" do comércio internacional, e a Nomenclatura Comum do Mercosul (NCM) é sua adaptação regional. Entender a estrutura desses códigos é crucial para a correta identificação dos seus produtos.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="w-full text-left p-4 font-semibold text-stone-800 flex justify-between items-center hover:bg-stone-50 accordion-button">
+                                <span>Sistema Harmonizado (SH)</span>
+                                <span class="transform transition-transform duration-300">&#9662;</span>
+                            </button>
+                            <div class="px-4 pb-4 text-stone-600 text-sm hidden accordion-content">
+                                <p class="mb-2">O Sistema Harmonizado de Designação e Codificação de Mercadorias (SH) é o "idioma" do comércio internacional. Desenvolvido pela Organização Mundial das Alfândegas (OMA) em 1985, é composto por uma estrutura de seis dígitos, com subdivisões detalhadas para classificar mercadorias.</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Utilizado globalmente como base para sistemas de classificação de diversos países.</li>
+                                    <li>Possui uma ordenação numérica lógica, de acordo com o grau de elaboração da mercadoria (ordem progressiva), começando por animais vivos e terminando com as obras de arte, passando por matérias-primas e produtos semi-elaborados.</li>
+                                    <li>O Brasil aderiu à Convenção Internacional sobre o Sistema Harmonizado em 31/10/1986.</li>
+                                    <li>Serve de base para a Nomenclatura Comum do Mercosul, usada pelo Brasil.</li>
+                                </ul>
+                                <p class="mt-4 font-semibold">Estrutura do SH (6 dígitos):</p>
+                                <div class="bg-blue-50 p-3 rounded-md inline-block text-base font-mono text-blue-800">
+                                    <span class="code-segment" data-info="Capítulo (2 primeiros dígitos)">00</span>
+                                    <span class="code-segment" data-info="Posição (4 primeiros dígitos)">00</span>.<span class="code-segment" data-info="Sub-Posição de 1º nível (5º dígito)">0</span><span class="code-segment" data-info="Sub-Posição de 2º nível (6º dígito)">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="w-full text-left p-4 font-semibold text-stone-800 flex justify-between items-center hover:bg-stone-50 accordion-button">
+                                <span>Nomenclatura Comum do Mercosul (NCM/SH)</span>
+                                <span class="transform transition-transform duration-300">&#9662;</span>
+                            </button>
+                            <div class="px-4 pb-4 text-stone-600 text-sm hidden accordion-content">
+                                <p class="mb-2">A Nomenclatura Comum do Mercosul (NCM/SH) é implementada pelos países membros do MERCOSUL (Brasil, Argentina, Paraguai, Uruguai e Bolívia). É baseada no Sistema Harmonizado, com acréscimo de dois dígitos para se adequar às necessidades regionais.</p>
+                                <p class="mb-2">O Código NCM é composto por 8 dígitos: capítulo, posição, sub-posição simples, sub-posição composta, item e subitem.</p>
+                                <p class="mt-4 font-semibold">Estrutura do NCM (8 dígitos):</p>
+                                <div class="bg-blue-50 p-3 rounded-md inline-block text-base font-mono text-blue-800">
+                                    <span class="code-segment" data-info="Capítulo (2 primeiros dígitos do SH)">00</span>
+                                    <span class="code-segment" data-info="Posição (4 primeiros dígitos do SH)">00</span>.<span class="code-segment" data-info="Subposição (6 primeiros dígitos do SH)">00</span>.<span class="code-segment" data-info="Item (7º dígito da NCM)">0</span><span class="code-segment" data-info="Subitem (8º dígito da NCM)">0</span>
+                                </div>
+                                <p class="mt-4 font-semibold">Exemplo de Interpretação da NCM (Café):</p>
+                                <table class="w-full text-left border-collapse mt-2 text-sm">
+                                    <thead>
+                                        <tr class="bg-stone-100">
+                                            <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Elemento</th>
+                                            <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Código</th>
+                                            <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Descrição</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-stone-200">
+                                            <td class="p-2">Seção</td>
+                                            <td class="p-2">II</td>
+                                            <td class="p-2">Produtos do reino vegetal</td>
+                                        </tr>
+                                        <tr class="border-b border-stone-200">
+                                            <td class="p-2">Capítulo</td>
+                                            <td class="p-2">09</td>
+                                            <td class="p-2">Café, chá, mate e especiarias</td>
+                                        </tr>
+                                        <tr class="border-b border-stone-200">
+                                            <td class="p-2">Posição</td>
+                                            <td class="p-2">09.01</td>
+                                            <td class="p-2">Café, mesmo torrado ou descafeinado; (...)</td>
+                                        </tr>
+                                        <tr class="border-b border-stone-200">
+                                            <td class="p-2">Subposição</td>
+                                            <td class="p-2">0901.1</td>
+                                            <td class="p-2">Café não torrado</td>
+                                        </tr>
+                                        <tr class="border-b border-stone-200">
+                                            <td class="p-2">Item</td>
+                                            <td class="p-2">0901.11</td>
+                                            <td class="p-2">Não descafeinado</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2">Subitem</td>
+                                            <td class="p-2">0901.11.10</td>
+                                            <td class="p-2">Em grãos</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="consequences" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Consequências de Erros e Boas Práticas</h2>
+                    <p class="mb-4 text-stone-600">A classificação fiscal incorreta de mercadorias pode acarretar sérias consequências para as empresas, desde problemas tributários até multas e descumprimento de procedimentos. Esta seção destaca os riscos associados a erros e oferece recomendações essenciais para garantir a conformidade e a segurança das suas operações de comércio exterior.</p>
+                    <div class="space-y-6 text-stone-700">
+                        <div>
+                            <h3 class="text-xl font-semibold text-red-600 mb-2">Possíveis Consequências de Erros na Classificação Fiscal:</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Recolhimento indevido de impostos (a maior ou a menor).</li>
+                                <li>Descumprimento de procedimentos administrativos de exportação ou importação.</li>
+                                <li>Aplicação de multas e outras penalidades.</li>
+                                <li>Problemas no relacionamento comercial com importadores ou exportadores.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-green-600 mb-2">Pontos de Atenção e Boas Práticas:</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>É fundamental que o exportador tenha consciência da importância da classificação fiscal adequada para preservar um bom relacionamento comercial com o importador.</li>
+                                <li>A classificação fiscal incorreta pode gerar um impacto tributário diferente do esperado pelo importador, encarecendo o custo final da mercadoria.</li>
+                                <li>Para garantir a correta classificação fiscal de suas mercadorias, recomenda-se sempre consultar um contador ou prestador de serviço especializado para validação da NCM.</li>
+                                <li>É imprescindível que o administrador conheça todas as características e especificidades da mercadoria a ser exportada para fins de adequação da classificação fiscal.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tools" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Ferramentas e Recursos Oficiais</h2>
+                    <p class="mb-6 text-stone-600">Para auxiliar na correta classificação fiscal e na pesquisa de informações relacionadas ao comércio exterior, diversas plataformas e fontes oficiais estão disponíveis. Esta seção lista os principais recursos que você pode utilizar para consultar códigos, simular tratamentos tributários e administrativos, e se manter atualizado sobre a legislação.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+
+            const resourcesData = [
+                { name: 'Secretaria da Receita Federal (SRF)', description: 'Órgão oficial responsável, no Brasil, pelo enquadramento ou interpretação correto da classificação de produtos na NCM/SH.', link: 'https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias' },
+                { name: 'Tarifa Externa Comum (TEC)', description: 'Conjunto de taxas sobre a importação de produtos e serviços entre os países do Mercosul.', link: 'http://www.camex.gov.br/tarifa-externa-comum-tec' },
+                { name: 'Organização Mundial de Aduanas (OMA)', description: 'Organização intergovernamental que representa 99% das Administrações Aduaneiras do mundo.', link: 'https://www.wcoomd.org/en/topics/nomenclature.aspx' },
+                { name: 'Portal Siscomex', description: 'Portal único de comércio exterior brasileiro, com ferramentas para classificação e simulação.', link: 'https://portalunico.siscomex.gov.br/classif/#/sumario?origem=menu&perfil=publico' },
+                { name: 'Simulador do Tratamento Administrativo de Exportação (Siscomex)', description: 'Ferramenta para simular o tratamento administrativo de exportações.', link: 'https://portalunico.siscomex.gov.br/talpco/x/#/simular-ta-exportacao?perfil-publico' },
+                { name: 'Simulador do Tratamento Tributário e Administrativo das Importações (SRF)', description: 'Ferramenta para simular o tratamento tributário e administrativo de importações.', link: 'http://www4.receita.fazenda.gov.br/simulador/' },
+                { name: 'Guia "Exportação Passo-a-passo" (MRE)', description: 'Guia completo para o processo de exportação.', link: 'http://www.investexportbrasil.gov.br/sites/default/files/publicacoes/manuais/PUBExportPassoPasso2012.pdf' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('span:last-child');
+                    content.classList.toggle('hidden');
+                    arrow.classList.toggle('rotate-180');
+                });
+            });
+
+            const codeSegments = document.querySelectorAll('.code-segment');
+            codeSegments.forEach(segment => {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'code-tooltip';
+                tooltip.textContent = segment.dataset.info;
+                segment.appendChild(tooltip);
+            });
+        });
+    </script>
+</body>
+</html>

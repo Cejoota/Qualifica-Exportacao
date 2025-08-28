@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de Incoterms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) Noções Gerais (General concepts), 2) Grupos de Incoterms (Groups of Incoterms), and 3) Pontos de Atenção (Important considerations) with a section for useful resources. This flow progresses from foundational knowledge to a detailed breakdown of each Incoterm group and practical advice, making the content easily digestible and actionable. Interactive elements include accordions to detail each Incoterm. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General concepts of Incoterms. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Incoterm groups (E, F, C, D). Goal: Inform/Organize. Method: Accordions (HTML/JS) for each group, with a brief explanation of the group's purpose. Justification: Organizes the Incoterms by their level of responsibility, making them easier to understand.
+        - Report Info: Detailed Incoterms (EXW, FCA, CPT, etc.). Goal: Inform. Method: Accordions for each specific term, detailing its responsibilities. Justification: Provides a detailed breakdown of each term without cluttering the page.
+        - Report Info: Important points and advice. Goal: Advise. Method: Bulleted lists. Justification: Highlights critical legal and practical advice for companies.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia de Incoterms® 2020</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um guia interativo para entender as responsabilidades e obrigações no comércio internacional.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="basics" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">Noções Gerais</button>
+            <button data-tab="groups" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Grupos de Incoterms</button>
+            <button data-tab="cautions" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Pontos de Atenção</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="basics" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Noções Gerais sobre Incoterms®</h2>
+                    <p class="mb-4 text-stone-600">Incoterms são regras internacionais criadas pela Câmara Internacional de Comércio (ICC) para harmonizar o entendimento sobre direitos e obrigações entre importador e exportador. Eles são cruciais para definir responsabilidades sobre frete, seguro, riscos e custos, garantindo maior segurança nas negociações.</p>
+                    
+                    <div class="space-y-4">
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li>Os Incoterms® 2020 são a 9ª edição das regras, em vigor desde 01/01/2020.</li>
+                            <li>Definem com precisão as responsabilidades do exportador e do importador.</li>
+                            <li>Estão diretamente atrelados à negociação e se refletem no contrato internacional e na formação do preço.</li>
+                        </ul>
+                        <h3 class="text-xl font-semibold text-blue-600 mt-4">Itens Cobertos pelos Incoterms®:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li>Obrigações e responsabilidades de vendedores e compradores.</li>
+                            <li>Ponto de transferência de risco.</li>
+                            <li>Responsabilidade pela contratação de seguros.</li>
+                            <li>Responsabilidade pelos custos diversos e pela entrega das mercadorias.</li>
+                            <li>Responsabilidades sobre despachos de exportação e importação.</li>
+                        </ul>
+                        <p class="mt-4 text-stone-600">É fundamental mencionar explicitamente a versão do Incoterm utilizada nos documentos, como "FOB Incoterms® 2020", para que sua aplicação seja válida.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="groups" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Grupos de Incoterms®</h2>
+                    <p class="mb-4 text-stone-600">Os Incoterms são divididos em quatro grupos, que organizam as regras de acordo com o nível de responsabilidade do exportador. O Grupo E, com responsabilidade mínima, é o oposto do Grupo D, com responsabilidade máxima. Explore cada grupo para entender suas características e os Incoterms que os compõem.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Grupo E (Ex Works - EXW)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">A responsabilidade do exportador é mínima. A mercadoria é disponibilizada no local de origem (fábrica ou armazém) e o importador arca com todos os riscos e custos do transporte. É aplicável a qualquer modalidade de transporte.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Grupo F (Free)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O exportador é responsável pela entrega da mercadoria em seu próprio país, a um transportador indicado pelo importador. O transporte principal não está a cargo do exportador.</p>
+                                <ul class="list-disc list-inside space-y-1 mt-2">
+                                    <li>**FCA (Free Carrier):** Usado em qualquer modalidade. Exportador entrega a mercadoria, desembaraçada para exportação, ao transportador no local nomeado.</li>
+                                    <li>**FAS (Free Alongside Ship):** Usado apenas em transporte aquaviário. Exportador termina suas obrigações quando a mercadoria é colocada ao lado do navio.</li>
+                                    <li>**FOB (Free on Board):** Usado apenas em transporte aquaviário. Exportador entrega a mercadoria a bordo do navio, e a responsabilidade é transferida nesse momento.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Grupo C (Cost and Carriage)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O exportador paga pelo transporte principal até o porto de destino. A responsabilidade e os riscos são transferidos ao importador a partir do momento em que a mercadoria é entregue ao transportador no porto de origem.</p>
+                                <ul class="list-disc list-inside space-y-1 mt-2">
+                                    <li>**CFR (Cost And Freight):** Usado apenas em transporte aquaviário. Vendedor paga o frete até o porto de destino.</li>
+                                    <li>**CIF (Cost Insurance And Freight):** Usado apenas em transporte aquaviário. Vendedor paga frete e contrata seguro com cobertura mínima até o porto de destino.</li>
+                                    <li>**CPT (Carriage Paid To):** Usado em qualquer modalidade. Vendedor entrega a mercadoria no país de origem, mas paga o transporte até o destino final.</li>
+                                    <li>**CIP (Carriage and Insurance Paid To):** Usado em qualquer modalidade. Vendedor entrega a mercadoria no país de origem e paga transporte e seguro com cobertura máxima até o destino.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Grupo D (Delivery)</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p class="mb-2">O exportador é responsável por entregar a mercadoria até o local estabelecido pelo importador, assumindo a máxima responsabilidade sobre o transporte.</p>
+                                <ul class="list-disc list-inside space-y-1 mt-2">
+                                    <li>**DAP (Delivered At Place):** Vendedor entrega a mercadoria no local de destino, não desembaraçada para importação.</li>
+                                    <li>**DPU (Delivered At Place Unloaded):** Vendedor entrega a mercadoria no local de destino, desembarcada e não desembaraçada para importação.</li>
+                                    <li>**DDP (Delivered Duty Paid):** Vendedor entrega a mercadoria no local de destino, desembaraçada para importação, e paga os tributos de importação.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cautions" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Pontos de Atenção e Boas Práticas</h2>
+                    <p class="mb-4 text-stone-600">A escolha do Incoterm correto é uma decisão crítica que afeta o preço do produto e as responsabilidades de ambas as partes. Esta seção destaca alguns pontos importantes para evitar erros e garantir uma negociação segura e eficiente.</p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li>**Mencione sempre a versão:** Especifique nos documentos "FOB Incoterms® 2020", "CIF Incoterms® 2020", etc.</li>
+                        <li>**Busque especialistas:** Em caso de dúvida, procure despachantes aduaneiros ou agentes de carga especializados.</li>
+                        <li>**Impacto no preço:** A escolha do Incoterm é crucial para a formação do preço, pois define quem arca com os custos de transporte e seguro.</li>
+                        <li>**Desembarque:** Verifique se o Incoterm escolhido é apropriado para a sua operação, especialmente para o transporte em contêineres.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre Incoterms e comércio exterior, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Câmara Internacional de Comércio (ICC)', description: 'Organização responsável pela criação e atualização dos Incoterms.', link: 'https://iccwbo.org/' },
+                { name: 'Guia "Aprendendo a Exportar"', description: 'Guia completo para o processo de exportação.', link: 'http://www.aprendendoaexportar.gov.br' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

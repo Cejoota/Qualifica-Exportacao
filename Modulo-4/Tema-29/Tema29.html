@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia da Lei de Proteção de Dados Pessoais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Blue Accents -->
+    <!-- Application Structure Plan: A tab-based single-page application. This structure was chosen to logically segment the content into key areas: 1) LGPD Brasil (Brazilian law and concepts), 2) Cenário Mundial (Global regulations and laws), 3) Transferências Internacionais (International data transfer rules), and 4) Recursos Úteis (Useful resources). This flow guides the user from the national law to international comparisons and practical rules, making the content easily digestible and actionable. Interactive elements include accordions to detail each topic and a comparative table for global laws. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: General LGPD concepts and penalties. Goal: Inform. Method: Text blocks and bullet points. Justification: Clearly presents foundational information.
+        - Report Info: Global laws (GDPR, APPI, CCPA, PDPA). Goal: Inform/Compare. Method: An interactive table with accordions for each law. Justification: Organizes comparative data in a clean, easy-to-read format.
+        - Report Info: International transfer regulations. Goal: Inform/Organize. Method: Accordions for general requirements and specific impositions. Justification: Presents complex legal regulations in a structured format.
+        - Report Info: Useful links. Goal: Inform/Provide access. Method: A styled list of links. Justification: Provides direct access to external resources for further research.
+        - Library/Method: Vanilla JS for all interactions and HTML/CSS for visual elements. The content is primarily textual and structural, so charts are not used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-color: #1d4ed8; color: #1d4ed8; background-color: #eff6ff; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .accordion-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover {
+            background-color: #f9fafb;
+        }
+        .accordion-content {
+            padding: 1rem;
+            padding-top: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: none;
+        }
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Guia da Lei de Proteção de Dados Pessoais</h1>
+            <p class="text-stone-600 mt-2 max-w-3xl mx-auto">Um manual interativo sobre a LGPD brasileira e as regulamentações internacionais para o comércio exterior.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-stone-200 mb-8">
+            <button data-tab="lgpd" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300 tab-active">LGPD Brasil</button>
+            <button data-tab="global" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Cenário Mundial</button>
+            <button data-tab="transfers" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Transferências Internacionais</button>
+            <button data-tab="resources" class="tab-button text-sm md:text-base py-3 px-3 md:px-6 font-semibold border-b-4 border-transparent hover:bg-stone-100 transition-colors duration-300">Recursos Úteis</button>
+        </nav>
+
+        <main>
+            <section id="lgpd" class="content-section active">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Lei Geral de Proteção de Dados (LGPD) - Brasil</h2>
+                    <p class="mb-4 text-stone-600">A Lei nº 13.709, de 2018, é a legislação que regula o tratamento de dados pessoais no Brasil, com o objetivo de proteger a privacidade e garantir a transparência. Ela se aplica a todos que realizam o tratamento de dados, independentemente do meio ou do país de sede, desde que a operação seja realizada no Brasil.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>LGPD: Direitos do Titular e Penalidades</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <h3 class="text-lg font-semibold text-stone-700 mb-2">Direitos do Titular:</h3>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Confirmação da existência de tratamento de dados.</li>
+                                    <li>Acesso, alteração, atualização ou exclusão de seus dados.</li>
+                                    <li>Oposição ao tratamento de dados sem consentimento.</li>
+                                </ul>
+                                <h3 class="text-lg font-semibold text-stone-700 mt-4 mb-2">Penalidades:</h3>
+                                <p>A partir de 2021, a Autoridade Nacional de Proteção de Dados (ANPD) pode aplicar multas que podem chegar a 2% do faturamento mensal da empresa, limitadas a R$ 50 milhões.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>O Processo de Proteção de Dados</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>**Titular:** Proprietário dos dados (pessoa física).</li>
+                                    <li>**Controlador:** Pessoa física ou jurídica que coleta os dados e decide sobre o tratamento.</li>
+                                    <li>**Operador:** Realiza o tratamento de dados em nome do controlador.</li>
+                                    <li>**Encarregado:** Profissional que atua como canal de comunicação entre as partes e a ANPD.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="global" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Cenário Mundial de Proteção de Dados</h2>
+                    <p class="mb-4 text-stone-600">O Brasil não está sozinho na regulamentação da proteção de dados. Vários países e regiões possuem suas próprias leis, com o objetivo de proteger a privacidade dos cidadãos. A LGPD brasileira absorveu conceitos de regulamentos internacionais, mas também se adaptou às particularidades do país. O quadro abaixo compara algumas das principais leis globais.</p>
+                    
+                    <div class="table-responsive">
+                        <table class="w-full text-left border-collapse mt-2 text-sm">
+                            <thead>
+                                <tr class="bg-stone-100">
+                                    <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Regulamento</th>
+                                    <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">País/Região</th>
+                                    <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Principais Disposições</th>
+                                    <th class="p-2 font-semibold text-stone-700 border-b border-stone-200">Penalidades</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2">LGPD</td>
+                                    <td class="p-2">Brasil</td>
+                                    <td class="p-2">Proteção de dados, consentimento informado.</td>
+                                    <td class="p-2">Multas de até 2% do faturamento, limitadas a R$ 50 milhões.</td>
+                                </tr>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2">GDPR</td>
+                                    <td class="p-2">União Europeia</td>
+                                    <td class="p-2">Transparência, licitude, minimização de dados.</td>
+                                    <td class="p-2">Multas de até 4% do faturamento global anual ou €20 milhões, o que for maior.</td>
+                                </tr>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2">APPI</td>
+                                    <td class="p-2">Japão</td>
+                                    <td class="p-2">Consentimento para coleta e uso de dados, anonimização.</td>
+                                    <td class="p-2">Multas e sanções administrativas.</td>
+                                </tr>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2">CCPA</td>
+                                    <td class="p-2">EUA (Califórnia)</td>
+                                    <td class="p-2">Direitos de saber, acessar e deletar dados.</td>
+                                    <td class="p-2">Multas de até $7.500 por violação intencional.</td>
+                                </tr>
+                                <tr class="border-b border-stone-200">
+                                    <td class="p-2">PDPA</td>
+                                    <td class="p-2">Argentina</td>
+                                    <td class="p-2">Consentimento, direitos de acesso, correção e atualização.</td>
+                                    <td class="p-2">Multas e sanções rigorosas.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="transfers" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Regulamento de Transferências Internacionais</h2>
+                    <p class="mb-4 text-stone-600">A transferência de dados pessoais para outros países é um ponto crítico que exige atenção especial. A Autoridade Nacional de Proteção de Dados (ANPD) estabeleceu um regulamento para garantir a segurança dos dados durante essas operações. Esta seção detalha os requisitos e as imposições para a sua empresa.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Requisitos Gerais</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                    <li>**Reconhecimento de Adequação:** O país de destino deve oferecer um nível de proteção de dados equivalente ao do Brasil.</li>
+                                    <li>**Consentimento Informado:** Obter consentimento explícito dos indivíduos antes da transferência.</li>
+                                    <li>**Direitos dos Titulares:** Garantir que os titulares possam exercer seus direitos (acesso, retificação, exclusão, etc.).</li>
+                                    <li>**Incorporação das Cláusulas-Padrão Contratuais:** As organizações devem incorporar cláusulas aprovadas pela ANPD em seus contratos.</li>
+                                    <li>**Análise de Riscos:** Realizar uma avaliação de impacto para identificar e mitigar riscos.</li>
+                                    <li>**Medidas Técnicas e Organizacionais:** Implementar medidas de segurança como criptografia e controle de acesso.</li>
+                                    <li>**Notificação:** Notificar a ANPD e os titulares em caso de violação de dados.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-button">
+                                <span>Imposições do Regulamento</span>
+                                <span class="arrow">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                    <li>**Normas Corporativas Globais:** Aprovação de normas para transferências de dados entre empresas do mesmo grupo econômico.</li>
+                                    <li>**Procedimentos de Aprovação:** Detalhamento dos procedimentos para aprovação de cláusulas contratuais e reconhecimento de adequação de outros países.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resources" class="content-section">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Recursos Úteis</h2>
+                    <p class="mb-6 text-stone-600">Para aprofundar seu conhecimento sobre a LGPD e as leis de proteção de dados internacionais, aqui está uma lista de links e recursos oficiais. Utilize-os para complementar sua pesquisa e tomar decisões mais informadas.</p>
+                    <div id="resources-list" class="space-y-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const sections = document.querySelectorAll('.content-section');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            const resourcesData = [
+                { name: 'Lei Geral de Proteção de Dados', description: 'Artigos sobre os direitos e obrigações da LGPD.', link: 'https://sebrae.com.br/sites/PortalSebrae/ufs/ac/artigos/direitos-e-obrigacoes-da-lei-geral-de-protecao-de-dados-pessoais,36ec96f387440710VgnVCM1000004c00210aRCRD' },
+                { name: 'Autoridade Nacional de Proteção de Dados (ANPD)', description: 'Página da autoridade reguladora brasileira.', link: 'https://www.gov.br/participamaisbrasil/autoridade-nacional-de-protecao-de-dados1' },
+                { name: 'Regulamento de Transferências Internacionais', description: 'Informações sobre o regulamento de transferências internacionais da ANPD.', link: 'https://www.gov.br/participamaisbrasil/regulamento-de-transferencias-internacionais-de-dados-pessoais-e-do-modelo-de-clausulas-padrao-contratuais' },
+                { name: 'Leis de proteção de dados ao redor do mundo', description: 'Artigo comparando leis de proteção de dados globais.', link: 'https://www.lgpdbrasil.com.br/conheca-as-leis-de-protecao-de-dados-ao-redor-do-mundo/' }
+            ];
+
+            const resourcesListContainer = document.getElementById('resources-list');
+            resourcesData.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'block bg-white p-4 rounded-lg border border-stone-200 hover:shadow-lg hover:border-blue-500 transition-all duration-300';
+                card.innerHTML = `
+                    <h4 class="font-bold text-blue-700">${item.name}</h4>
+                    <p class="text-sm text-stone-600 mt-1">${item.description}</p>
+                    <span class="text-xs text-blue-600 mt-2 inline-block">Acessar Recurso &rarr;</span>
+                `;
+                resourcesListContainer.appendChild(card);
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    tab.classList.add('tab-active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('.arrow');
+                    const isExpanded = button.classList.toggle('active');
+
+                    if (isExpanded) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
