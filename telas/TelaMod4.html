@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1</title>
+    <link rel="shortcut icon" href="../assets/cargueiro.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles/header.css">
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .img-navio {
+        width: 100%;
+        height: 100vh;
+        flex-shrink: 0;
+        z-index: -1;
+        position: absolute;
+        object-fit: cover;
+        opacity: 0.6;
+    }
+
+    /* From Uiverse.io by xopc333 */
+    .button {
+        display: block;
+        position: relative;
+        width: 56px;
+        height: 56px;
+        margin-left: 10vh;
+        overflow: hidden;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
+        border: 0;
+    }
+
+    .button:before,
+    .button:after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        inset: 7px;
+    }
+
+    .button:before {
+        border: 4px solid #f0eeef;
+        transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
+            transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+    }
+
+    .button:after {
+        border: 4px solid #00C8FF;
+        transform: scale(1.3);
+        transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+            transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        opacity: 0;
+    }
+
+    .button:hover:before,
+    .button:focus:before {
+        opacity: 0;
+        transform: scale(0.7);
+        transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+            transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .button:hover:after,
+    .button:focus:after {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
+            transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+    }
+
+    .button-box {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .button-elem {
+        display: block;
+        width: 20px;
+        height: 20px;
+        margin: 17px 18px 0 18px;
+        transform: rotate(180deg);
+        fill: #2C3E50;
+    }
+
+    .button:hover .button-box,
+    .button:focus .button-box {
+        transition: 0.4s;
+        transform: translateX(-56px);
+    }
+
+    .container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
+    .text-container {
+        width: 55%;
+        border-radius: 50px;
+        border: 7px solid #00C8FF;
+        background: #2C3E50;
+        color: #FFF;
+        text-shadow: 3px 3px 10px #000;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #000;
+        font-family: Inter;
+        font-size: 35px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-align: center;
+    }
+
+    .lista-temas {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .temas {
+        width: 55%;
+        height: 65px;
+        border-radius: 25px;
+        border: 7px solid #00C8FF;
+        background: rgba(44, 62, 80, 0.901);
+        margin-top: 10px;
+        margin-left: 10%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .temas__texto {
+        color: #FFF;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);
+        font-family: Poppins;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: normal;
+        margin-left: 10px;
+    }
+
+    .temas:hover {
+        background: #00ff40a8;
+        transition: 0.2s;
+    }
+</style>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+    function Tema14() {
+        window.location.href = "../Modulo-4/Tema-14/Tema14.html";
+    }
+    function Tema17() {
+        window.location.href = "../Modulo-4/Tema-17/Tema17.html";
+    }
+    function Tema18() {
+        window.location.href = "../Modulo-4/Tema-18/Tema18.html";
+    }
+    function Tema19() {
+        window.location.href = "../Modulo-4/Tema-19/Tema19.html";
+    }
+    function Tema20() {
+        window.location.href = "../Modulo-4/Tema-20/Tema20.html";
+    }
+    function Tema21() {
+        window.location.href = "../Modulo-4/Tema-21/Tema21.html";
+    }
+    function Tema29() {
+        window.location.href = "../Modulo-4/Tema-29/Tema29.html";
+    }
+</script>
+
+<body>
+    <img class="img-navio" src="../assets/modulo 4.png" alt="">
+    <header>
+        <h1>QUALIFICAÇÃO DE EXPORTAÇÃO</h1>
+    </header>
+    <div class="container">
+        <div>
+            <button class="button" onclick="goBack()">
+                <div class="button-box">
+                    <span class="button-elem">
+                        <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="button-elem">
+                        <svg viewBox="0 0 46 40">
+                            <path
+                                d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
+                            </path>
+                        </svg>
+                    </span>
+                </div>
+            </button>
+        </div>
+        <div class="text-container">
+            <p class="text">MÓDULO 4 - FINANÇAS INTERNACIONAIS</p>
+        </div>
+    </div>
+    <div class="lista-temas">
+        <div class="temas" onclick="Tema14()">
+            <p class="temas__texto">14 - FORMAÇÃO DE PREÇOS</p>
+        </div>
+        <div class="temas" onclick="Tema17()">
+            <p class="temas__texto">17 - CONTRATOS INTERNACIONAIS</p>
+        </div>
+        <div class="temas" onclick="Tema18()">
+            <p class="temas__texto">18 - RISCOS E GARANTIAS NAS OPERAÇÕES INTERNACIONAIS</p>
+        </div>
+        <div class="temas" onclick="Tema19()">
+            <p class="temas__texto">19 - RECEBIMENTO DE REMESSA NO EXTERIOR</p>
+        </div>
+        <div class="temas" onclick="Tema20()">
+            <p class="temas__texto">20 - OPERAÇÕES DE CÂMBIO</p>
+        </div>
+        <div class="temas" onclick="Tema21()">
+            <p class="temas__texto">21 - FINANCIAMENTO ÀS EXPORTAÇÕES</p>
+        </div>
+        <div class="temas" onclick="Tema29()">
+            <p class="temas__texto">29 - LGPD NO MERCADO SELECIONADO</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
